@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container, .container2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 50vh;
+            width: 100%;
+            gap: 12px;
+
+            svg {
+              height: 18rem;
+              aspect-ratio: 1;
+            }
+            
+            .angkaBantu {
+              width: 18rem;
+              aspect-ratio: 1;
+
+              display: flex;
+              flex-direction: column;
+              justify-content: space-around;
+              text-align: left;
+
+              position: absolute;
+              transform: translateX(-2rem) translateY(1.5rem);
+
+              span {
+                flex: 1;
+              }
+            }
+            .angkaBantu2{
+              width: 18rem;
+              aspect-ratio: 1;
+              
+              display: flex;
+              justify-content: space-around;
+              text-align: left;
+              
+              position: absolute;
+              transform: translateX(1.5rem) translateY(-1.5rem);
+              span {
+                flex: 1;
+              }
+            }
+
+        }
+
+    </style>
+</head>
+<body>
+    
+  
+  <div class="container">
+      <div class="angkaBantu">
+        <span>16</span>
+        <span>32</span>
+        <span>48</span>
+        <span>64</span>
+        <span>80</span>
+        <span>96</span>
+        <span>112</span>
+        <span>128</span>
+        <span>144</span>
+      </div>
+      <div class="angkaBantu2">
+        <span>16</span>
+        <span>32</span>
+        <span>48</span>
+        <span>64</span>
+        <span>80</span>
+        <span>96</span>
+        <span>112</span>
+        <span>128</span>
+        <span>144</span>
+      </div>
+
+
+        <svg width="18rem" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+          <g 
+            stroke="#000000" 
+            stroke-opacity="0.1" 
+            stroke-width="1" 
+            vector-effect="non-scaling-stroke"
+          >
+          <!-- horizontal -->
+            <line x1="0" y1="0" x2="144" y2="0" />
+            <line x1="0" y1="16" x2="144" y2="16" />
+            <line x1="0" y1="32" x2="144" y2="32" />
+            <line x1="0" y1="48" x2="144" y2="48" />
+            <line x1="0" y1="64" x2="144" y2="64" />
+            <line x1="0" y1="80" x2="144" y2="80" />
+            <line x1="0" y1="96" x2="144" y2="96" />
+            <line x1="0" y1="112" x2="144" y2="112" />
+            <line x1="0" y1="128" x2="144" y2="128" />
+            <line x1="0" y1="144" x2="144" y2="144" />
+        
+            <!-- vertical -->
+            <line x1="0" y1="0" x2="0" y2="144" />
+            <line x1="16" y1="0" x2="16" y2="144" />
+            <line x1="32" y1="0" x2="32" y2="144" />
+            <line x1="48" y1="0" x2="48" y2="144" />
+            <line x1="64" y1="0" x2="64" y2="144" />
+            <line x1="80" y1="0" x2="80" y2="144" />
+            <line x1="96" y1="0" x2="96" y2="144" />
+            <line x1="112" y1="0" x2="112" y2="144" />
+            <line x1="128" y1="0" x2="128" y2="144" />
+            <line x1="144" y1="0" x2="144" y2="144" />
+
+          <!-- 16^2 + 16^2 = 22.6  = 11.3-->
+
+            <path d="M 0 128   V 64   L 16 48   V 112 " fill="black"/>
+            <path d="M 32 80   V 32   L 48 16   V 96 " fill="black"/>
+            
+            <path d="M 64 112   V 16   L 80 32   V 128 " fill="black"/>
+
+            <path d="M 96 112   V 16   L 112 32   V 112 " fill="black"/>
+
+            <path d="M 128 112   V 48   L 144 64   V 128 " fill="black"/>
+
+            <!-- <path d="M 0 48   L 48 0   V 16   L 0 64" fill="black"/> -->
+            <path d="M 0 60   L 48 12   V 16   L 0 64" fill="black"/>
+            <path d="M 32 84   L 80 132   V  128   L 32 80" fill="black"/>
+
+
+            <path d="M 64 16   L 112 64   V 60   L 64 12" fill="black"/>
+
+            <path d="M 96 16   L 144 64   V 60   L 96 12" fill="black"/>
+            
+
+
+
+          </g>
+        </svg>
+
+        
+      </div>
+      
+      <div class="container2">
+        
+        
+        <svg width="18rem" id="my-svg" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+          
+          
+          
+          <path d="M 0 128   V 64   L 16 48   V 112 " fill="black"/>
+            <path d="M 32 80   V 32   L 48 16   V 96 " fill="black"/>
+            
+            <path d="M 64 112   V 16   L 80 32   V 128 " fill="black"/>
+
+            <path d="M 96 112   V 16   L 112 32   V 112 " fill="black"/>
+
+            <path d="M 128 112   V 48   L 144 64   V 128 " fill="black"/>
+
+            <!-- <path d="M 0 48   L 48 0   V 16   L 0 64" fill="black"/> -->
+            <path d="M 0 60   L 48 12   V 16   L 0 64" fill="black"/>
+            <path d="M 32 84   L 80 132   V  128   L 32 80" fill="black"/>
+
+
+            <path d="M 64 16   L 112 64   V 60   L 64 12" fill="black"/>
+
+            <path d="M 96 16   L 144 64   V 60   L 96 12" fill="black"/>
+            
+
+
+        </svg>
+
+        <button id="mergeButton">Gabungkan Path!</button>
+
+    </div>
+
+    <script>
+
+  /**
+ * Menggabungkan semua elemen <path> di dalam sebuah SVG menjadi satu <path> tunggal.
+ * @param {string} svgSelector - Selector CSS untuk elemen <svg> target (e.g., '#my-svg').
+ * @param {object} newPathAttributes - Atribut untuk path baru yang akan dibuat (e.g., { fill: 'none', stroke: 'blue' }).
+ * @returns {SVGPathElement|null} - Mengembalikan elemen path baru yang telah dibuat, atau null jika gagal.
+ */
+function mergeSvgPaths(svgSelector, newPathAttributes = {}) {
+  // 1. Temukan elemen SVG utama di dalam dokumen
+  const svg = document.querySelector(svgSelector);
+  if (!svg) {
+    console.error(`Elemen SVG dengan selector "${svgSelector}" tidak ditemukan.`);
+    return null;
+  }
+
+  // 2. Temukan semua elemen <path> di dalam SVG tersebut
+  const paths = svg.querySelectorAll('path');
+  if (paths.length === 0) {
+    console.warn(`Tidak ada elemen <path> yang ditemukan di dalam "${svgSelector}".`);
+    return null;
+  }
+
+  // 3. Gabungkan semua data 'd' menjadi satu string, dipisahkan oleh spasi
+  let combinedD = '';
+  paths.forEach(path => {
+    const d = `${path.getAttribute('d').split(" ").filter(Boolean).join(" ")}`;
+
+    const p = d.split(" ");
+
+    let indexNotNan = null
+    const hasilan = p.map((ini, i) => {
+      
+      try {
+        const angka = parseInt(ini);
+        let hasil = (72 - angka) * 2 + angka;
+        
+        if(hasil < 0){
+          hasil = hasil * -1;
+        }
+        if(Number.isFinite(hasil)){
+          if(p[parseInt(i)-1] == "V"){
+            console.log("ini v besar")
+            return hasil;
+          } else {
+            if(indexNotNan + 2 == i) {
+              return hasil;
+            } else if(indexNotNan + 1 == i) {
+              return ini;
+            }
+          }
+        } else {
+          indexNotNan = i;
+          return ini;
+        }
+      } catch(err){
+        console.log(err);
+      }
+    }).join(" ");
+    console.log(hasilan)
+
+    if (d) {
+      combinedD += hasilan + ' ';
+    }
+  });
+
+  // Hapus spasi ekstra di akhir
+  combinedD = combinedD.trim();
+  
+  // 4. Buat elemen <path> baru menggunakan namespace SVG yang benar
+  // PENTING: Untuk membuat elemen SVG, kita harus menggunakan createElementNS
+  const newPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+
+  // 5. Atur atribut 'd' dengan data yang sudah digabungkan
+  newPath.setAttribute('d', combinedD);
+
+  // Atur atribut lain untuk path baru dari parameter
+  for (const [key, value] of Object.entries(newPathAttributes)) {
+    newPath.setAttribute(key, value);
+  }
+  
+
+  // 6. Tambahkan path baru ke dalam SVG
+  svg.appendChild(newPath);
+
+  // 7. Sembunyikan semua path yang lama agar tidak tumpang tindih
+  paths.forEach(path => {
+    path.style.display = 'none';
+  });
+  
+  console.log('Path berhasil digabungkan!', newPath);
+  return newPath;
+}
+
+const mergeButton = document.getElementById('mergeButton');
+mergeButton.addEventListener('click', () => {
+  // Panggil fungsi untuk menggabungkan path di dalam SVG #my-svg
+  // dan berikan style untuk path yang baru
+  mergeSvgPaths('#my-svg', {
+    id: 'merged-path',
+    fill: 'black'
+  });
+  
+  // Menonaktifkan tombol setelah diklik sekali
+  mergeButton.disabled = true;
+  mergeButton.textContent = 'Berhasil Digabungkan!';
+});
+
+</script>
+
+</body>
+</html>

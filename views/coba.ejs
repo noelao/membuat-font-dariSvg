@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            gap: 12px;
+        }
+
+
+    body { text-align: center; }
+    #checkmark-path {
+        /* Nilai 1000 ini adalah perkiraan. Untuk hasil presisi, 
+        panjang path harus diukur dengan JavaScript: path.getTotalLength();
+        Tapi untuk demo, angka besar yang melebihi panjang path sudah cukup.
+        */
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+
+        /* Mulai animasi saat halaman dimuat */
+        animation: draw-line 18s ease-out forwards;
+    }
+
+    /* Mendefinisikan animasi 'draw-line' */
+    @keyframes draw-line {
+        /* Di akhir animasi, offset menjadi 0, sehingga garis terlihat penuh */
+        to {
+            stroke-dashoffset: 0;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <svg width="18rem" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+          <g 
+            stroke="#000000" 
+            stroke-opacity="0.1" 
+            stroke-width="1" 
+            vector-effect="non-scaling-stroke"
+          >
+          <!-- horizontal -->
+            <line x1="0" y1="0" x2="144" y2="0" />
+            <line x1="0" y1="16" x2="144" y2="16" />
+            <line x1="0" y1="32" x2="144" y2="32" />
+            <line x1="0" y1="48" x2="144" y2="48" />
+            <line x1="0" y1="64" x2="144" y2="64" />
+            <line x1="0" y1="80" x2="144" y2="80" />
+            <line x1="0" y1="96" x2="144" y2="96" />
+            <line x1="0" y1="112" x2="144" y2="112" />
+            <line x1="0" y1="128" x2="144" y2="128" />
+            <line x1="0" y1="144" x2="144" y2="144" />
+        
+            <!-- vertical -->
+            <line x1="0" y1="0" x2="0" y2="144" />
+            <line x1="16" y1="0" x2="16" y2="144" />
+            <line x1="32" y1="0" x2="32" y2="144" />
+            <line x1="48" y1="0" x2="48" y2="144" />
+            <line x1="64" y1="0" x2="64" y2="144" />
+            <line x1="80" y1="0" x2="80" y2="144" />
+            <line x1="96" y1="0" x2="96" y2="144" />
+            <line x1="112" y1="0" x2="112" y2="144" />
+            <line x1="128" y1="0" x2="128" y2="144" />
+            <line x1="144" y1="0" x2="144" y2="144" />
+
+
+
+            <!-- M,L berati position:absolute, masa bodoh dengan garis sebelumnya dan langsung ke ukuran parent -->
+            <!-- m,k berati, dia akan meneruskan ukuran sebelumnya -->
+
+            <!-- <path d="M 60 10   L 110 110  L 10 110   Z"         fill="black"/> -->
+
+            <!-- sintask M x y / m dx dy -->
+            <!-- mengangkat dan memindahkannya -->
+            <path d="M 20 20   M 80 80" fill="black"/>
+            <!-- <circle cx="20" cy="20" r="3" fill="blue" /> -->
+            <circle cx="80" cy="80" r="3" fill="blue" />
+
+
+            <!-- sintaks L x y / l dx dy -->
+            <!-- menggambar garis lurus dari posisi ini ke posisi selanjutnya -->
+            <path d="M 20 80   L 80 20"  stroke="green" stroke-width="2" fill="black" />
+
+            <!-- Sintaks: H x atau h dx | V y atau v dy
+            Analogi: "Jalan pintas" untuk menggambar garis horizontal atau vertikal sempurna. Anda hanya perlu memberikan satu koordinat saja. -->
+            <path d="M 20 20   V 80      H 80"     stroke="purple" stroke-width="2" fill="none"/>
+
+
+          </g>
+        </svg>
+        <svg width="18rem" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+          <g 
+            stroke="#000000" 
+            stroke-opacity="0.05" 
+            stroke-width="1" 
+            vector-effect="non-scaling-stroke"
+          >
+          <!-- horizontal -->
+            <line x1="0" y1="0" x2="144" y2="0" />
+            <line x1="0" y1="16" x2="144" y2="16" />
+            <line x1="0" y1="32" x2="144" y2="32" />
+            <line x1="0" y1="48" x2="144" y2="48" />
+            <line x1="0" y1="64" x2="144" y2="64" />
+            <line x1="0" y1="80" x2="144" y2="80" />
+            <line x1="0" y1="96" x2="144" y2="96" />
+            <line x1="0" y1="112" x2="144" y2="112" />
+            <line x1="0" y1="128" x2="144" y2="128" />
+            <line x1="0" y1="144" x2="144" y2="144" />
+        
+            <!-- vertical -->
+            <line x1="0" y1="0" x2="0" y2="144" />
+            <line x1="16" y1="0" x2="16" y2="144" />
+            <line x1="32" y1="0" x2="32" y2="144" />
+            <line x1="48" y1="0" x2="48" y2="144" />
+            <line x1="64" y1="0" x2="64" y2="144" />
+            <line x1="80" y1="0" x2="80" y2="144" />
+            <line x1="96" y1="0" x2="96" y2="144" />
+            <line x1="112" y1="0" x2="112" y2="144" />
+            <line x1="128" y1="0" x2="128" y2="144" />
+            <line x1="144" y1="0" x2="144" y2="144" />
+
+            <!-- 
+            Sintaks: C x1 y1, x2 y2, x y
+            Analogi: "Menggambar garis lengkung dengan dua 'tuas' kontrol".
+            Cara Pakai:
+            (x, y) adalah titik akhir kurva.
+            (x1, y1) adalah titik kontrol untuk awal kurva (menarik garis dari titik awal).
+            (x2, y2) adalah titik kontrol untuk akhir kurva (menarik garis ke titik akhir). -->
+
+
+            <path d="M 0 0            C 72 64, 72 64, 144 0" stroke="blue" stroke-width="2" fill="none"/>
+
+            <circle cx="32" cy="16" r="3" fill="red" />
+            <circle cx="112" cy="16" r="3" fill="red" />
+
+            <!-- Sintaks: A rx ry, x-axis-rotation, large-arc-flag, sweep-flag, x y
+            Analogi: "Menggambar potongan dari sebuah elips atau lingkaran". Ini adalah perintah yang paling kompleks.
+            Parameter:
+            rx ry: Radius horizontal dan vertikal dari elips.
+            x-axis-rotation: Rotasi elips (biasanya 0).
+            large-arc-flag: Pilih jalur busur yang panjang (1) atau pendek (0)?
+            sweep-flag: Arah menggambar, searah jarum jam (1) atau berlawanan (0)?
+            x y: Titik akhir busur. -->
+
+            <path d="M 50 80 A 40 40, 0, 0, 0, 120 80"
+                stroke="red" stroke-width="2" fill="none"/>
+
+            <path d="M 50 80 A 40 40, 0, 0, 1, 120 80"
+                stroke="blue" stroke-width="2" fill="none"/>
+
+            <!-- Sintaks: Z (tidak punya parameter)
+            Analogi: "Menutup bentuk secara otomatis". -->
+            <path d="M 50 10   L 90 90   L 10 90   Z"        stroke="black" stroke-width="2" fill="lightblue"/>
+
+
+          </g>
+        </svg>
+
+
+
+
+
+
+        
+    <svg width="150" height="150" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+        <path id="checkmark-path"
+              fill="none" 
+              stroke="#4CAF50" 
+              stroke-width="4"
+              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+    </svg>
+
+
+    </div>
+
+
+
+</body>
+</html>
