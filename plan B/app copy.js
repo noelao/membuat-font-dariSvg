@@ -124,11 +124,10 @@ function normalizePath(pathD, targetHeight) {
 app.get('/', (req, res) => {
     res.render('index');
 });
+app.get('/cursor', (req, res) => {
+    res.render('cursor');
+});
 
-/**
- * Route utama untuk membuat font.
- * Semua logika pembuatan font ada di dalam sini.
- */
 app.post('/create-font', (req, res) => {
     // 1. Ambil nama font dari form
     const fontName = req.body.fontName.replace(/\s+/g, '') || 'MyFont'; 
@@ -140,8 +139,11 @@ app.post('/create-font', (req, res) => {
         { unicode: 'A', glyphName: 'A', path: 'M256 768L0 0H512L256 768Z', targetHeight: 800 },
         { unicode: 'B', glyphName: 'B', path: 'M0 0H256C384 0 512 128 512 256S384 512 256 512H0V0ZM128 128V384H256C320 384 384 320 384 256S320 128 256 128H128Z M0 512H256C448 512 512 608 512 768S448 1024 256 1024H0V512ZM128 640V896H256C320 896 384 832 384 768S320 640 256 640H128Z', targetHeight: 800 },
         { unicode: 'C', glyphName: 'C', path: 'M512 256C512 128 384 0 256 0S0 128 0 256V768C0 896 128 1024 256 1024S512 896 512 768V640H384V768C384 832 320 896 256 896S128 832 128 768V256C128 192 192 128 256 128S384 192 384 256V384H512V256Z', targetHeight: 800 },
+        { unicode: 'D', glyphName: 'D', 
+            path: "M 0 16 V 80 L 16 96 V 32 M 32 64 V 112 L 48 128 V 48 M 64 32 V 128 L 80 112 V 16 M 96 32 V 128 L 112 112 V 32 M 128 32 V 96 L 144 80 V 16 M 0 84 L 48 132 V 128 L 0 80 M 32 60 L 80 12 V 16 L 32 64 M 64 128 L 112 80 V 84 L 64 132 M 96 128 L 144 80 V 84 L 96 132",
+            targetHeight: 550 },
         { unicode: 'c', glyphName: 'c', 
-            path: "M 0 128 V 64 L 16 48 V 112 M 32 80 V 32 L 48 16 V 96 M 64 112 V 16 L 80 32 V 128 M 96 112 V 16 L 112 32 V 112 M 128 112 V 48 L 144 64 V 128 M 0 60 L 48 12 V 16 L 0 64 M 32 84 L 80 132 v -4 L 32 80 M 64 16 L 112 64 v -4 L 64 12 M 96 16 L 144 64 v -4 L 96 12",
+            path: "M 0 16 V 80 L 16 96 V 32 M 32 64 V 112 L 48 128 V 48 M 64 32 V 128 L 80 112 V 16 M 96 32 V 128 L 112 112 V 32 M 128 32 V 96 L 144 80 V 16 M 0 84 L 48 132 V 128 L 0 80 M 32 60 L 80 12 V 16 L 32 64 M 64 128 L 112 80 V 84 L 64 132 M 96 128 L 144 80 V 84 L 96 132",
             targetHeight: 550 }
     ];
 
@@ -191,6 +193,9 @@ app.get('/coba', (req, res) => {
 app.get('/buat', (req, res) => {
     res.render("buat");
 });
+app.get('/lihat', (req, res) => {
+    res.render("lihat");
+});
 
 // Route untuk mengunduh file font yang telah dibuat
 app.get('/download/:filename', (req, res) => {
@@ -210,4 +215,3 @@ app.get('/download/:filename', (req, res) => {
 app.listen(port, () => {
     console.log(`Aplikasi berjalan di http://localhost:${port}`);
 });
-

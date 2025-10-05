@@ -1,0 +1,400 @@
+<style>
+    .hurufan {
+        display: flex;
+        padding: 12px;
+        flex-wrap: wrap;
+        .ini {
+            cursor: var(--cur-pointer);
+            width: 8rem;
+            height: 8rem;
+            position: relative;
+            .copyy {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+            }
+            svg {
+                height: 8rem;width: 8rem;
+                z-index: -10;
+            }
+        }
+    }
+    .tampilkanBuat, .tulisHuruf {
+        width: 100%;
+        height: max-content;
+
+        margin-top: 128px;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 12px;
+
+        font-size: .8rem;
+
+        svg {
+            height: 18rem;
+            aspect-ratio: 1;
+        }
+        
+        .angkaBantu {
+            width: 18rem;
+            aspect-ratio: 1;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            text-align: left;
+
+            position: absolute;
+            transform: translateX(-2rem) translateY(1rem);
+
+            span {
+            flex: 1;
+            }
+        }
+        .angkaBantu2{
+            width: 18rem;
+            aspect-ratio: 1;
+            
+            display: flex;
+            justify-content: space-around;
+            text-align: left;
+            
+            position: absolute;
+            transform: translateX(1rem) translateY(-1.5rem);
+
+            span {
+            flex: 1;
+            }
+        }
+    }
+
+    .tulisHuruf {
+        margin-top: 1rem;
+        form {
+            display: flex;
+            flex-direction: column;
+            textarea {
+                cursor: var(--cur-teks);
+                font-family: poppins;
+    
+                width: 18rem;
+                min-height: 9rem;
+
+                padding: 8px;
+                resize: vertical;
+            }
+            button {
+                cursor: var(--cur-pointer);
+                padding: 12px 0;
+            }
+        }
+        .tombolan {
+            display: flex;
+            gap: 2px;
+            .tombol h1{
+                cursor: var(--cur-pointer) !important;
+                border: solid black 1px;
+                padding: 0 8px;
+            }
+            .hori {
+                display: flex;
+                gap: 2px;
+                flex-direction: column;
+            }
+            .verti {
+                display: flex;
+                gap: 2px;
+                flex-direction: column;
+            }
+        }
+    }
+</style>
+
+<div class="hurufan">
+</div>
+<div class="tampilkanBuat">
+
+    
+    <div class="angkaBantu">
+    <span>16</span>
+    <span>32</span>
+    <span>48</span>
+    <span>64</span>
+    <span>80</span>
+    <span>96</span>
+    <span>112</span>
+    <span>128</span>
+    <span>144</span>
+    <span>160</span>
+    <span>176</span>
+    <span>192</span>
+    </div>
+    <div class="angkaBantu2">
+    <span>16</span>
+    <span>32</span>
+    <span>48</span>
+    <span>64</span>
+    <span>80</span>
+    <span>96</span>
+    <span>112</span>
+    <span>128</span>
+    <span>144</span>
+    <span>160</span>
+    <span>176</span>
+    <span>192</span>
+    </div>
+
+
+    <svg width="18rem" id="ambilDari" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+    <g 
+        stroke="#000000" 
+        stroke-opacity="0.1" 
+        stroke-width="1" 
+        vector-effect="non-scaling-stroke"
+    >
+    <!-- horizontal -->
+        <line x1="0" y1="0" x2="192" y2="0" />
+        <line x1="0" y1="16" x2="192" y2="16" />
+        <line x1="0" y1="32" x2="192" y2="32" />
+        <line x1="0" y1="48" x2="192" y2="48" />
+        <line x1="0" y1="64" x2="192" y2="64" />
+        <line x1="0" y1="80" x2="192" y2="80" />
+        <line x1="0" y1="96" x2="192" y2="96" />
+        <line x1="0" y1="112" x2="192" y2="112" />
+        <line x1="0" y1="128" x2="192" y2="128" />
+        <line x1="0" y1="144" x2="192" y2="144" />
+        <line x1="0" y1="160" x2="192" y2="160" />
+        <line x1="0" y1="176" x2="192" y2="176" />
+        <line x1="0" y1="192" x2="192" y2="192" />
+    
+        <!-- vertical -->
+        <line x1="0" y1="0" x2="0" y2="192" />
+        <line x1="16" y1="0" x2="16" y2="192" />
+        <line x1="32" y1="0" x2="32" y2="192" />
+        <line x1="48" y1="0" x2="48" y2="192" />
+        <line x1="64" y1="0" x2="64" y2="192" />
+        <line x1="80" y1="0" x2="80" y2="192" />
+        <line x1="96" y1="0" x2="96" y2="192" />
+        <line x1="112" y1="0" x2="112" y2="192" />
+        <line x1="128" y1="0" x2="128" y2="192" />
+        <line x1="144" y1="0" x2="144" y2="192" />
+        <line x1="160" y1="0" x2="160" y2="192" />
+        <line x1="176" y1="0" x2="176" y2="192" />
+        <line x1="192" y1="0" x2="192" y2="192" />
+
+    <!-- 16^2 + 16^2 = 22.6  = 11.3-->
+
+    <!-- 8 12 -->
+    <!-- 5 10 -->
+
+    <path d="M 16 16 H 144 V 80 H 16 Z"
+    fill="#00000080"/>
+    
+        
+
+
+    
+
+    </g>
+    </svg>
+
+</div>
+<div class="tulisHuruf">
+    <form>
+        <textarea name="" id="">M 16 16 H 144 V 80 H 16 Z</textarea>
+        <button id="submit">Upload</button>
+    </form>
+    <div class="tombolan">
+        <h1>geser : </h1>
+        <div class="hori">
+            <div class="tombol kanan">
+                <h1>kanan</h1>
+            </div>
+            <div class="tombol kiri">
+                <h1>kiri</h1>
+            </div>
+        </div>
+        <div class="verti">
+            <div class="tombol bawah">
+                <h1>bawah</h1>
+            </div>
+            <div class="tombol atas">
+                <h1>atas</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const tampilkan = document.querySelector(".hurufan");
+
+    const inputan = document.querySelector("textarea");
+    const dariMana = document.getElementById("ambilDari");
+
+    inputan.addEventListener("keyup", function(){
+        
+        const paths = dariMana.querySelector('path');
+        
+        paths.setAttribute("d", this.value)
+    })
+
+    const namaFont = window.location.href.split("/").pop();
+    tampilkanFont(namaFont);
+    
+    async function tampilkanFont(namaFont) {
+        let paths = []
+        try {
+            const response = await fetch(`/api/dari/${namaFont}`);
+            if(!response.ok){
+                throw new Error("not ok");
+            }
+            
+
+            paths = await response.json();
+        } catch(err){
+            console.log(err);
+        } finally {
+            const ono = paths.map(ono => {
+                return `
+                <div class="ini">
+                <div class="copyy">
+                </div>
+                <svg width="18rem" id="${ono.id}" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path d="${ono.path}"
+                    fill="black" />
+                    
+                </svg>
+                </div>
+                `
+            }).join("");
+            // tampilkan.insertAdjacentHTML("forened", ono);
+            tampilkan.innerHTML = ono;
+        }
+    }
+</script>
+<script>
+
+    const myForm = document.querySelector('form');
+    const submitBtn = document.querySelector('#submit');
+    
+    async function handleFormSubmit (event) {
+        event.preventDefault();
+        const jsonIni = {
+            path: inputan.value
+        }
+        console.log(JSON.stringify(jsonIni))
+        try {
+            const response = await fetch('/api/dari/'+namaFont, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonIni) 
+            });
+            if(!response.ok){
+                throw new Error("no okk");
+            }
+
+            const feedBack = await response.json();
+            console.log(feedBack);
+
+        } catch(err) {
+            console.log(err);
+        } finally {
+            tampilkanFont(namaFont);
+        }
+    }
+
+    submitBtn.addEventListener("click", handleFormSubmit);
+</script>
+
+<!-- untuk tombolan geser -->
+ <script>
+    const tombolHori = document.querySelectorAll(".hori .tombol");
+    const tombolVerti = document.querySelectorAll(".verti .tombol");
+
+    // geser ke kanan dan kiri
+    tombolHori.forEach((tomble, i) => {
+        tomble.addEventListener("click", function(){
+            console.log(i)
+            if(i == 0){
+                geserHori(16);
+            } else {
+                geserHori(-16);
+            }
+        })
+    })
+
+    function geserHori(valueIni){
+        const dari = inputan.value.split(" ");
+        
+        let indexNotNan = null
+
+        const geser = valueIni;
+
+        // balik vertical
+        const hasilan = dari.map((ini, i) => {
+            try {
+                const angka = parseInt(ini);
+
+                if(Number.isFinite(angka)){
+                    if(dari[parseInt(i)-1] == "V"){
+                        return angka;
+                    } else {
+                        if(indexNotNan + 2 == i) {
+                            return angka;
+                        } else if(indexNotNan + 1 == i) {
+                            return angka + geser;
+                        }
+                    }
+                } else {
+                    indexNotNan = i;
+                    return ini;
+                }
+            } catch(err){
+                console.log(err);
+            }
+        }).join(" ");
+
+        inputan.value = hasilan;
+        const paths = dariMana.querySelector('path');
+        
+        paths.setAttribute("d", hasilan)
+    }
+
+
+ </script>
+
+<script>
+    tampilkan.addEventListener("click", event => {
+        if(event.target.matches('div.copyy')){
+            console.log("pencetlah")
+            
+            const inian = event.target.parentElement.querySelector("svg");
+            const path = inian.querySelector("path").getAttribute("d");
+
+            inputan.value = path;
+            const paths = dariMana.querySelector('path');
+            paths.setAttribute("d", path)
+        }
+    })
+</script>
+<script>
+        let adaPerubahanBelumDisimpan = false;
+        window.addEventListener('beforeunload', (event) => {
+        // Hanya tampilkan prompt jika flag 'adaPerubahanBelumDisimpan' bernilai true
+        if (adaPerubahanBelumDisimpan) {
+            // Baris-baris ini diperlukan untuk memicu dialog konfirmasi dari browser
+            event.preventDefault();
+            // Chrome memerlukan returnValue untuk di-set.
+            event.returnValue = '';
+        }
+        // Jika flag-nya false, fungsi ini tidak melakukan apa-apa dan pengguna bisa
+        // me-refresh halaman dengan bebas.
+    });
+</script>

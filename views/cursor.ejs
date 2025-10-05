@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <title>Kursor Custom dengan JS</title>
+  <style>
+    * {
+      /* LANGKAH 1: Sembunyikan kursor asli */
+      cursor: none;
+    }
+
+    /* LANGKAH 2: Styling untuk kursor custom kita */
+    .kursor-custom {
+      width: 30px;
+      height: 30px;
+      border: 2px solid black;
+      border-radius: 50%; /* Membuatnya menjadi lingkaran */
+      position: fixed; /* Penting agar bisa bergerak bebas di seluruh layar */
+      
+      /* Gunakan transform untuk pergerakan yang lebih mulus */
+      transform: translate(-50%, -50%);
+
+      /* Pastikan kursor tidak menghalangi interaksi dengan elemen di bawahnya */
+      pointer-events: none; 
+
+      /* Efek transisi untuk pergerakan yang lebih 'lembut' */
+      transition: all 0.1s ease;
+      transition-property: width, height, border;
+      
+      /* Pastikan kursor selalu di lapisan paling atas */
+      z-index: 9999;
+    }
+    
+    /* Class tambahan saat hover di atas link */
+    .kursor-custom.hover-link {
+        width: 50px;
+        height: 50px;
+        background-color: rgba(255, 105, 180, 0.5); /* Warna pink transparan */
+        border: 2px solid deeppink;
+    }
+  </style>
+</head>
+<body>
+  <div class="kursor-custom"></div>
+
+  <h1>Arahkan mouse Anda di sekitar halaman.</h1>
+  <p>Kursor ini dibuat dengan JavaScript!</p>
+  <a href="#">Arahkan ke link ini</a> untuk melihat efeknya.
+
+  <script>
+    // LANGKAH 3: Logika JavaScript
+    const kursor = document.querySelector('.kursor-custom');
+    const links = document.querySelectorAll('a');
+
+    // Event listener untuk pergerakan mouse
+    window.addEventListener('mousemove', (e) => {
+      // Ambil posisi X dan Y dari mouse
+      const posX = e.clientX;
+      const posY = e.clientY;
+
+      // Update posisi kursor custom kita
+      kursor.style.left = `${posX}px`;
+      kursor.style.top = `${posY}px`;
+    });
+    
+    // Tambahkan efek saat hover di atas link
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            kursor.classList.add('hover-link');
+        });
+        link.addEventListener('mouseleave', () => {
+            kursor.classList.remove('hover-link');
+        });
+    });
+  </script>
+</body>
+</html>

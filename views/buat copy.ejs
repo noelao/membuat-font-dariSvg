@@ -14,8 +14,6 @@
             width: 100%;
             gap: 12px;
 
-            font-size: 1rem;
-
             svg {
               height: 18rem;
               aspect-ratio: 1;
@@ -31,7 +29,7 @@
               text-align: left;
 
               position: absolute;
-              transform: translateX(-2rem) translateY(1rem);
+              transform: translateX(-2rem) translateY(1.5rem);
 
               span {
                 flex: 1;
@@ -46,12 +44,12 @@
               text-align: left;
               
               position: absolute;
-              transform: translateX(1rem) translateY(-1.5rem);
-
+              transform: translateX(1.5rem) translateY(-1.5rem);
               span {
                 flex: 1;
               }
             }
+
         }
 
     </style>
@@ -70,9 +68,6 @@
         <span>112</span>
         <span>128</span>
         <span>144</span>
-        <span>160</span>
-        <span>176</span>
-        <span>192</span>
       </div>
       <div class="angkaBantu2">
         <span>16</span>
@@ -84,64 +79,65 @@
         <span>112</span>
         <span>128</span>
         <span>144</span>
-        <span>160</span>
-        <span>176</span>
-        <span>192</span>
       </div>
 
 
-      <svg width="18rem" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-        <g 
-          stroke="#000000" 
-          stroke-opacity="0.1" 
-          stroke-width="1" 
-          vector-effect="non-scaling-stroke"
-        >
-        <!-- horizontal -->
-          <line x1="0" y1="0" x2="192" y2="0" />
-          <line x1="0" y1="16" x2="192" y2="16" />
-          <line x1="0" y1="32" x2="192" y2="32" />
-          <line x1="0" y1="48" x2="192" y2="48" />
-          <line x1="0" y1="64" x2="192" y2="64" />
-          <line x1="0" y1="80" x2="192" y2="80" />
-          <line x1="0" y1="96" x2="192" y2="96" />
-          <line x1="0" y1="112" x2="192" y2="112" />
-          <line x1="0" y1="128" x2="192" y2="128" />
-          <line x1="0" y1="144" x2="192" y2="144" />
-          <line x1="0" y1="160" x2="192" y2="160" />
-          <line x1="0" y1="176" x2="192" y2="176" />
-          <line x1="0" y1="192" x2="192" y2="192" />
-      
-          <!-- vertical -->
-          <line x1="0" y1="0" x2="0" y2="192" />
-          <line x1="16" y1="0" x2="16" y2="192" />
-          <line x1="32" y1="0" x2="32" y2="192" />
-          <line x1="48" y1="0" x2="48" y2="192" />
-          <line x1="64" y1="0" x2="64" y2="192" />
-          <line x1="80" y1="0" x2="80" y2="192" />
-          <line x1="96" y1="0" x2="96" y2="192" />
-          <line x1="112" y1="0" x2="112" y2="192" />
-          <line x1="128" y1="0" x2="128" y2="192" />
-          <line x1="144" y1="0" x2="144" y2="192" />
-          <line x1="160" y1="0" x2="160" y2="192" />
-          <line x1="176" y1="0" x2="176" y2="192" />
-          <line x1="192" y1="0" x2="192" y2="192" />
-
-        <!-- 16^2 + 16^2 = 22.6  = 11.3-->
-
-        <!-- 8 12 -->
-        <!-- 5 10 -->
-
-        <path d="M 0 96 H 32 V 0 H 64 V 64 H 112 L 176 160 V 192 H 0"
-        fill="black"/>
+        <svg width="18rem" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
+          <g 
+            stroke="#000000" 
+            stroke-opacity="0.1" 
+            stroke-width="1" 
+            vector-effect="non-scaling-stroke"
+          >
+          <!-- horizontal -->
+            <line x1="0" y1="0" x2="144" y2="0" />
+            <line x1="0" y1="16" x2="144" y2="16" />
+            <line x1="0" y1="32" x2="144" y2="32" />
+            <line x1="0" y1="48" x2="144" y2="48" />
+            <line x1="0" y1="64" x2="144" y2="64" />
+            <line x1="0" y1="80" x2="144" y2="80" />
+            <line x1="0" y1="96" x2="144" y2="96" />
+            <line x1="0" y1="112" x2="144" y2="112" />
+            <line x1="0" y1="128" x2="144" y2="128" />
+            <line x1="0" y1="144" x2="144" y2="144" />
         
+            <!-- vertical -->
+            <line x1="0" y1="0" x2="0" y2="144" />
+            <line x1="16" y1="0" x2="16" y2="144" />
+            <line x1="32" y1="0" x2="32" y2="144" />
+            <line x1="48" y1="0" x2="48" y2="144" />
+            <line x1="64" y1="0" x2="64" y2="144" />
+            <line x1="80" y1="0" x2="80" y2="144" />
+            <line x1="96" y1="0" x2="96" y2="144" />
+            <line x1="112" y1="0" x2="112" y2="144" />
+            <line x1="128" y1="0" x2="128" y2="144" />
+            <line x1="144" y1="0" x2="144" y2="144" />
+
+          <!-- 16^2 + 16^2 = 22.6  = 11.3-->
+
+            <path d="M 0 128   V 64   L 16 48   V 112 " fill="black"/>
+            <path d="M 32 80   V 32   L 48 16   V 96 " fill="black"/>
+            
+            <path d="M 64 112   V 16   L 80 32   V 128 " fill="black"/>
+
+            <path d="M 96 112   V 16   L 112 32   V 112 " fill="black"/>
+
+            <path d="M 128 112   V 48   L 144 64   V 128 " fill="black"/>
+
+            <!-- <path d="M 0 48   L 48 0   V 16   L 0 64" fill="black"/> -->
+            <path d="M 0 60   L 48 12   V 16   L 0 64" fill="black"/>
+            <path d="M 32 84   L 80 132   V  128   L 32 80" fill="black"/>
+
+
+            <path d="M 64 16   L 112 64   V 60   L 64 12" fill="black"/>
+
+            <path d="M 96 16   L 144 64   V 60   L 96 12" fill="black"/>
             
 
 
-        
 
-        </g>
-      </svg>
+          </g>
+        </svg>
 
         
       </div>
@@ -149,24 +145,28 @@
       <div class="container2">
         
         
-        <svg width="18rem" id="my-svg" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+        <svg width="18rem" id="my-svg" height="18rem" viewBox="0 0 144 144" xmlns="http://www.w3.org/2000/svg">
           
           
-
-
           
-
-        
-            <path d="M 16 112 V 62 L 64 30
-            V 101 L 48 112 V 43 L 32 54 V 101"
-            fill="black" />
-
-            <path d="M 64 51 L 96 30 V 101 L 80 112 V 43 L 64 53"
-            fill="black"/>
+          <path d="M 0 128   V 64   L 16 48   V 112 " fill="black"/>
+            <path d="M 32 80   V 32   L 48 16   V 96 " fill="black"/>
             
+            <path d="M 64 112   V 16   L 80 32   V 128 " fill="black"/>
+
+            <path d="M 96 112   V 16   L 112 32   V 112 " fill="black"/>
+
+            <path d="M 128 112   V 48   L 144 64   V 128 " fill="black"/>
+
+            <!-- <path d="M 0 48   L 48 0   V 16   L 0 64" fill="black"/> -->
+            <path d="M 0 60   L 48 12   V 16   L 0 64" fill="black"/>
+            <path d="M 32 84   L 80 132   V  128   L 32 80" fill="black"/>
 
 
+            <path d="M 64 16   L 112 64   V 60   L 64 12" fill="black"/>
 
+            <path d="M 96 16   L 144 64   V 60   L 96 12" fill="black"/>
+            
 
 
         </svg>
@@ -206,10 +206,6 @@ function mergeSvgPaths(svgSelector, newPathAttributes = {}) {
     const p = d.split(" ");
 
     let indexNotNan = null
-
-    const geser = 0;
-
-    // balik vertical
     const hasilan = p.map((ini, i) => {
       
       try {
@@ -227,7 +223,7 @@ function mergeSvgPaths(svgSelector, newPathAttributes = {}) {
             if(indexNotNan + 2 == i) {
               return hasil;
             } else if(indexNotNan + 1 == i) {
-              return angka + geser;
+              return ini;
             }
           }
         } else {
@@ -240,45 +236,8 @@ function mergeSvgPaths(svgSelector, newPathAttributes = {}) {
     }).join(" ");
     console.log(hasilan)
 
-
-    // balik horiszontal
-    const horiss = p.map((ini, i) => {
-      
-      try {
-        const angka = parseInt(ini);
-        let hasil = (72 - angka) * 2 + angka;
-        
-        if(hasil < 0){
-          hasil = hasil * -1;
-        }
-        if(Number.isFinite(hasil)){
-          if(p[parseInt(i)-1] == "V"){
-            console.log("ini v besar")
-            return ini;
-          } else {
-            if(indexNotNan + 2 == i) {
-              // return angka + geser;
-              return ini;
-            } else if(indexNotNan + 1 == i) {
-              return hasil;
-            }
-          }
-        } else {
-          indexNotNan = i;
-          return ini;
-        }
-      } catch(err){
-        console.log(err);
-      }
-    }).join(" ");
-    console.log(horiss)
-
-
-
-
     if (d) {
-      combinedD += horiss + ' ';
-      console.log(combinedD);
+      combinedD += hasilan + ' ';
     }
   });
 

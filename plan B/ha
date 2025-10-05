@@ -1,0 +1,13 @@
+<svg width="18rem" id="my-svg" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+    
+<path d="M 16 144 V 62 L 64 30
+V 108 L 48 96 V 43 L 32 54 V 133"
+fill="black" />
+
+<path d="M 80 117 V 30     L 112 51 V 30      L 160 62   V 144   L 144 128
+V 54    L 128 43     V 128   H 112 V 54   L 96 43   V 130
+L 48 98 V 96
+" 
+fill="black"/>
+
+</svg>

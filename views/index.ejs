@@ -1,26 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-g">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Creator</title>
-    <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f0f2f5; }
-        .container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); text-align: center; }
-        input[type="text"] { padding: 10px; font-size: 1rem; width: 250px; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 10px 20px; font-size: 1rem; color: white; background-color: #007bff; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Buat Font Sederhana Anda</h1>
-        <p>Aplikasi ini akan membuat font .ttf dengan karakter A, B, dan C.</p>
-        <form action="/create-font" method="POST">
-            <input type="text" name="fontName" placeholder="Masukkan nama font (e.g., MyFirstFont)" required>
-            <br>
-            <button type="submit">Buat Font</button>
-        </form>
-    </div>
-</body>
-</html>
+<style>
+    .daftarFonts {
+        display: flex;
+        flex-direction: column;
+    }
+</style>
+
+<div class="kata">
+    <h1>Nama font :</h1>
+    <div class="daftarFonts"></div>
+</div>
+
+<script>
+    let font = []
+    const daftarFonts = document.querySelector(".daftarFonts");
+
+    tampilkanNama();
+    async function tampilkanNama() {
+        try {
+            const response = await fetch("/api/fonts");
+            if(!response.ok){
+                throw new Error("not ok");
+            }
+    
+            font = await response.json();
+            console.log(font)
+    
+        } catch(err){
+            console.log(err);
+        } finally {
+            const sup = font.map(ini => {
+                return `
+                <a href="/font/dari/${ini.replace(".le", "")}">
+                <h1>${ini.replace(".le", "")}
+                </h1>
+                </a>
+                `
+            }).join(" ");
+            daftarFonts.innerHTML = sup;
+        }
+    }
+</script>
