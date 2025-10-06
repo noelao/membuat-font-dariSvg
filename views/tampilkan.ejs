@@ -99,6 +99,20 @@
                 border: solid black 1px;
                 padding: 0 8px;
             }
+            .tombol {
+                height: 3rem;
+                aspect-ratio: 1;
+                cursor: var(--cur-pointer) !important;
+                border: solid black 1px;
+                padding: 8px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .tombol svg{
+                height: 100%;
+            }
             .hori {
                 display: flex;
                 gap: 2px;
@@ -211,18 +225,38 @@
         <h1>geser : </h1>
         <div class="hori">
             <div class="tombol kanan">
-                <h1>kanan</h1>
+                <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path d="
+                    M 64 0 L 160 96 L 64 192
+                    " fill="black"></path>
+                    
+                </svg>
             </div>
             <div class="tombol kiri">
-                <h1>kiri</h1>
+                <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    
+                    <path d="
+                    M 144 0 V 192 L 48 96
+                    " fill="black"></path>
+                    
+                </svg>
             </div>
         </div>
         <div class="verti">
             <div class="tombol bawah">
-                <h1>bawah</h1>
+                <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    <path d="
+                    M 0 48 H 192 L 96 144
+                    " fill="black"></path>
+                </svg>
             </div>
             <div class="tombol atas">
-                <h1>atas</h1>
+                <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                    <path d="
+                    M 0 144 H 192 L 96 48
+                    " fill="black"></path>
+                </svg>
             </div>
         </div>
     </div>
@@ -328,7 +362,19 @@
                 geserHori(-16);
             }
         })
-    })
+    });
+    // geser ke kanan dan kiri
+    tombolVerti.forEach((tomble, i) => {
+        tomble.addEventListener("click", function(){
+            console.log(i)
+            if(i == 0){
+                geserVerti(16);
+            } else {
+                geserVerti(-16);
+            }
+        })
+    });
+
 
     function geserHori(valueIni){
         const dari = inputan.value.split(" ");
@@ -350,6 +396,47 @@
                             return angka;
                         } else if(indexNotNan + 1 == i) {
                             return angka + geser;
+                        }
+                    }
+                } else {
+                    indexNotNan = i;
+                    return ini;
+                }
+            } catch(err){
+                console.log(err);
+            }
+        }).join(" ");
+
+        inputan.value = hasilan;
+        const paths = dariMana.querySelector('path');
+        
+        paths.setAttribute("d", hasilan)
+    }
+
+    function geserVerti(valueIni){
+        const dari = inputan.value.split(" ");
+        
+        let indexNotNan = null
+
+        const geser = valueIni;
+
+        // balik vertical
+        const hasilan = dari.map((ini, i) => {
+            try {
+                const angka = parseInt(ini);
+
+                if(Number.isFinite(angka)){
+                    if(dari[parseInt(i)-1] == "H"){
+                            return angka;
+                    } else {
+                        if(indexNotNan + 2 == i) {
+                            return angka + geser;
+                        } else if(indexNotNan + 1 == i) {
+                            if(dari[parseInt(i)-1] == "V"){
+                                return angka + geser;
+                            } else {
+                                return angka;
+                            }
                         }
                     }
                 } else {
