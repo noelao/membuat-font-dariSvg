@@ -70,6 +70,31 @@
             }
         }
     }
+    .tampilkanBuat {
+        .fotoan {
+            width: 18rem;
+            aspect-ratio: 1;
+            background-color: #e6e6e6;
+
+            position: absolute;
+            z-index: -10;
+            opacity: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                max-height: 100%;
+                max-width: 100%;
+
+                height: auto;
+                width: auto;
+            }
+        }
+        .terlihat {
+            opacity: 1;
+        }
+    }
 
     .tulisHuruf {
         margin-top: 1rem;
@@ -123,7 +148,24 @@
                 gap: 2px;
                 flex-direction: column;
             }
+            .lihat {
+                background-color: #4b4b4b;
+                height: 3rem;
+                aspect-ratio: 1;
+            }
         }
+        .tombolanFoto {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            .lihat {
+                width: 3rem;
+                aspect-ratio: 1;
+                cursor: var(--cur-pointer);
+                background-color: #797979;
+            }
+        }
+
     }
 </style>
 
@@ -214,6 +256,9 @@
 
     </g>
     </svg>
+    <div class="fotoan">
+        <img src="" alt="preview gambar" id="previewGambar">
+    </div>
 
 </div>
 <div class="tulisHuruf">
@@ -258,6 +303,15 @@
                     " fill="black"></path>
                 </svg>
             </div>
+        </div>
+    </div>
+    <div class="tombolanFoto">
+        <div class="image">
+            <h2>image : </h2>
+            <input type="file" name="foto" id="foto" class="foto">
+        </div>
+        <div class="lihat">
+
         </div>
     </div>
 </div>
@@ -346,6 +400,46 @@
 
     submitBtn.addEventListener("click", handleFormSubmit);
 </script>
+
+<!-- untuk menampilkan image ke layer belakang -->
+ <script>
+    const inputFile = document.querySelector(".image input.foto");
+    const tampilkanGambar = document.getElementById("previewGambar");
+    const parentHilang = tampilkanGambar.parentElement;
+    const tombolTampilkan = document.querySelector(".tombolanFoto .lihat");
+
+    console.log(parentHilang)
+
+    inputFile.addEventListener('change', function() {
+            
+        // 4. Ambil file yang dipilih (files[0])
+        const file = this.files[0];
+
+        if (file) {
+            // 5. Buat objek FileReader
+            const reader = new FileReader();
+
+            // 6. Tentukan apa yang terjadi saat file selesai dibaca
+            reader.onload = function(e) {
+                // e.target.result berisi Data URL (string Base64)
+                // Atur 'src' dari <img> ke hasil bacaan
+                tampilkanGambar.src = e.target.result;
+            }
+
+            // 7. Baca file sebagai Data URL (memicu event 'onload')
+            reader.readAsDataURL(file);
+            if(parentHilang.classList.contains("terlihat")){
+            } else {
+                parentHilang.classList.toggle("terlihat");
+            }
+        }
+    });
+        
+    tombolTampilkan.addEventListener("click", function(){
+        parentHilang.classList.toggle("terlihat");
+    })
+
+ </script>
 
 <!-- untuk tombolan geser -->
  <script>
