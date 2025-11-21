@@ -101,6 +101,10 @@
         form {
             display: flex;
             flex-direction: column;
+            input {
+                padding: 2px 8px;
+                cursor: var(--cur-teks);
+            }
             textarea {
                 cursor: var(--cur-teks);
                 font-family: poppins;
@@ -246,7 +250,8 @@
     <!-- 8 12 -->
     <!-- 5 10 -->
 
-    <path d="M 16 16 H 144 V 80 H 16 Z"
+    <path d="M 0 32 H 48 A 32 32 0 0 1 80 64
+A 32 32 0 0 1 48 96 H 0"
     fill="#00000080"/>
     
         
@@ -263,7 +268,9 @@
 </div>
 <div class="tulisHuruf">
     <form>
-        <textarea name="" id="">M 16 16 H 144 V 80 H 16 Z</textarea>
+        <input type="text" placeholder="name">
+        <textarea name="" id="">
+M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         <button id="submit">Upload</button>
     </form>
     <div class="tombolan">
@@ -449,7 +456,6 @@
     // geser ke kanan dan kiri
     tombolHori.forEach((tomble, i) => {
         tomble.addEventListener("click", function(){
-            console.log(i)
             if(i == 0){
                 geserHori(16);
             } else {
@@ -460,7 +466,6 @@
     // geser ke kanan dan kiri
     tombolVerti.forEach((tomble, i) => {
         tomble.addEventListener("click", function(){
-            console.log(i)
             if(i == 0){
                 geserVerti(16);
             } else {
@@ -471,9 +476,12 @@
 
 
     function geserHori(valueIni){
-        const dari = inputan.value.split(" ");
-        
-        let indexNotNan = null
+        const sebelumDari = inputan.value.split(" ");
+        const dari = sebelumDari.map(ini => {
+            return ini.replace(",", "").replace("\n", "")
+        });
+
+        let indexNotNan = null;
 
         const geser = valueIni;
 
@@ -483,7 +491,15 @@
                 const angka = parseInt(ini);
 
                 if(Number.isFinite(angka)){
-                    if(dari[parseInt(i)-1] == "V"){
+                    if(dari[indexNotNan] == "A"){
+                        if(indexNotNan + 6 == i) {
+                            return angka + geser;
+                        } else if (indexNotNan + 6 == i) {
+                            return angka + geser;
+                        } else {
+                            return angka;
+                        }
+                    } else if(dari[parseInt(i)-1] == "V"){
                         return angka;
                     } else {
                         if(indexNotNan + 2 == i) {
@@ -500,7 +516,6 @@
                 console.log(err);
             }
         }).join(" ");
-
         inputan.value = hasilan;
         const paths = dariMana.querySelector('path');
         
@@ -508,7 +523,10 @@
     }
 
     function geserVerti(valueIni){
-        const dari = inputan.value.split(" ");
+        const sebelumDari = inputan.value.split(" ");
+        const dari = sebelumDari.map(ini => {
+            return ini.replace(",", "").replace("\n", "")
+        });
         
         let indexNotNan = null
 
@@ -520,7 +538,13 @@
                 const angka = parseInt(ini);
 
                 if(Number.isFinite(angka)){
-                    if(dari[parseInt(i)-1] == "H"){
+                    if(dari[indexNotNan] == "A"){
+                        if(indexNotNan + 7 == i) {
+                            return angka + geser;
+                        } else {
+                            return angka;
+                        }
+                    } else if(dari[parseInt(i)-1] == "H"){
                             return angka;
                     } else {
                         if(indexNotNan + 2 == i) {
