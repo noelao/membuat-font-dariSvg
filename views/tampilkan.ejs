@@ -5,16 +5,17 @@
         flex-wrap: wrap;
         .ini {
             cursor: var(--cur-pointer);
-            width: 8rem;
-            height: 8rem;
+            height: max-content;
             position: relative;
+
+            display: flex;
+            flex-direction: column;
+            
             .copyy {
-                width: 100%;
                 height: 100%;
                 position: absolute;
             }
             svg {
-                height: 8rem;width: 8rem;
                 z-index: -10;
             }
         }
@@ -94,6 +95,24 @@
         .terlihat {
             opacity: 1;
         }
+        .garisVertikal {
+            width: 1px;
+            height: 18rem;
+            background-color: #000;
+
+            position: absolute;
+
+            transform: translateX(calc(-50% + 3/2 * 6rem));
+        }
+        .garisHorizontal {
+            height: 1px;
+            width: 18rem;
+            background-color: #000;
+
+            position: absolute;
+
+            transform: translateY(calc(-50% + 3/2 * 6rem));
+        }
     }
 
     .tulisHuruf {
@@ -101,7 +120,45 @@
         form {
             display: flex;
             flex-direction: column;
+            .ukuran {
+                display: flex;
+                flex-direction: column;
+                
+                width: 100%;
+                height: 1rem;
+                overflow-y: hidden;
+
+                border-right: 1px solid black;
+                border-left: 1px solid black;
+
+                .petunjuk {
+                    width: 100%;
+                    cursor: var(--cur-pointer);
+                    height: 1rem;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 8px;
+                    small {
+                        display: flex;
+                        align-items: center;
+                        height: 1rem;
+                        gap: 3px;
+                        svg {
+                            height: 1rem;
+                        }
+                    }
+                }
+                .petunjuk:hover {
+                    background-color: #eeeeee;
+                }
+                .input {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
             input {
+                width: 100%;
                 padding: 2px 8px;
                 cursor: var(--cur-teks);
             }
@@ -172,9 +229,77 @@
 
     }
 </style>
+<style>
+    .mode {
+        display: flex;
+        .terpilih {
+            padding: 8px 12px;
+            background-color: #82f166;
+            width: max-content;
+            border-radius: 2px;
+        }
+        .pilih {
+            height: 1.4rem;
+            overflow-y: hidden;
+
+            width: max-content;
+            cursor: var(--cur-pointer);
+
+            p {
+                padding: 0 8px;
+                cursor: var(--cur-pointer);
+                height: 1.4rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            p:hover {
+                background-color: #eeeeee;
+            }
+            .tombol {
+                height: 1.4rem;
+                display: flex;
+                cursor: var(--cur-pointer);
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                justify-content: center;
+                width: max-content;
+                p {
+                    height: 1.4rem;
+                    cursor: var(--cur-pointer);
+                }
+                svg {
+                    height: 100%;
+                }
+            }
+            .tombol:hover {
+                background-color: #eeeeee;
+            }
+        }
+    }
+</style>
 
 <div class="hurufan">
 </div>
+<div class="mode">
+    <p class="terpilih">tambah data</p>
+    <div class="pilih">
+        <div class="tombol">
+
+            <p>pilih mode </p>
+            <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <path d="
+                        M 0 48 H 192 L 96 144
+                        " fill="black"></path>
+            </svg>
+        </div>
+        <p class="pilihan tambah">tambah</p>
+        <p class="pilihan hapus">hapus</p>
+        <p class="pilihan update">update</p>
+    </div>
+</div>
+
 <div class="tampilkanBuat">
 
     
@@ -265,10 +390,28 @@ A 32 32 0 0 1 48 96 H 0"
         <img src="" alt="preview gambar" id="previewGambar">
     </div>
 
+
+    <div class="garisVertikal garisanPetunjuk"></div>
+    <div class="garisHorizontal garisanPetunjuk"></div>
 </div>
 <div class="tulisHuruf">
     <form>
-        <input type="text" placeholder="name">
+        <input type="text" placeholder="name" id="catatan" name="catatan">
+        <div class="ukuran">
+            <div class="petunjuk">
+                <small>ukuran 
+                    <svg viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                        <path d="
+                        M 0 48 H 192 L 96 144
+                        " fill="black"></path>
+                    </svg>
+                </small>
+            </div>
+            <div class="input">
+                <input type="text" name="tinggi" id="tinggi" value="192">
+                <input type="text" name="lebar" id="lebar" value="192">
+            </div>
+        </div>
         <textarea name="" id="">
 M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         <button id="submit">Upload</button>
@@ -324,6 +467,50 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 </div>
 
 
+<!-- ganti mode pada -->
+<script>
+    const tombolMode = document.querySelector(".mode .pilih .tombol");
+    const tombolModePilihan = document.querySelectorAll(".mode .pilih .pilihan");
+    const displayModeName = document.querySelector(".mode .terpilih");
+
+    let tertutup = true
+    tombolMode.addEventListener("click", function(){
+        if(tertutup){
+            document.querySelector(".mode .pilih").style.overflowY = "unset";
+            tertutup = !tertutup;
+        } else {
+            document.querySelector(".mode .pilih").style.overflowY = "hidden";
+            tertutup = !tertutup;
+        }
+    });
+    tombolModePilihan.forEach((ini, i) => {
+        ini.addEventListener("click", function(){
+            if(tertutup){
+                document.querySelector(".mode .pilih").style.overflowY = "unset";
+                tertutup = !tertutup;
+            } else {
+                document.querySelector(".mode .pilih").style.overflowY = "hidden";
+                tertutup = !tertutup;
+            }
+            if(i == "0"){
+                displayModeName.textContent = "tambah data";
+                displayModeName.style.backgroundColor = "#82f166";
+                displayModeName.style.color = "black"
+            } else if(i == "1"){
+                displayModeName.style.backgroundColor = "red";
+                displayModeName.textContent = "hapus data";
+                displayModeName.style.color = "white"
+            } else {
+                displayModeName.textContent = "update data";
+                displayModeName.style.backgroundColor = "blue";
+                displayModeName.style.color = "white"
+            }
+        })
+    })
+
+</script>
+
+<!-- meload data svg dan menampilkan di atas page -->
 <script>
     const tampilkan = document.querySelector(".hurufan");
 
@@ -353,33 +540,98 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         } catch(err){
             console.log(err);
         } finally {
-            const ono = paths.map(ono => {
+            const onol = paths.map(ono => {
+                let lebar = 192
+                let tinggi = 192
+                if(ono.ukuran){
+                    tinggi = parseInt(ono.ukuran[0]);
+                    lebar = parseInt(ono.ukuran[1]);
+                }
+                const lebar2 = 8 * lebar/192;
+
+                let catatan = "..."
+                if(ono.catatan){
+                    catatan = ono.catatan == null ? "..." : ono.catatan;
+                } 
+
                 return `
-                <div class="ini">
-                <div class="copyy">
-                </div>
-                <svg width="18rem" id="${ono.id}" height="18rem" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-                    
-                    <path d="${ono.path}"
-                    fill="black" />
-                    
-                </svg>
+                <div class="ini" style="width: ${8}rem;">
+                    <div class="copyy" style="width: ${8}rem;">
+                    </div>
+                    <svg width="${8}rem" height="${8}rem" id="${ono.id}" viewBox="0 0 ${lebar} ${tinggi}" xmlns="http://www.w3.org/2000/svg">
+                        
+                        <path d="${ono.path}"
+                        ukuran="${tinggi+","+lebar}"
+                        fill="black" />
+                        
+                    </svg>
+                    <div class="nama">
+                        <small>
+                            ${catatan}
+                        </small>
+                    </div>
                 </div>
                 `
             }).join("");
             // tampilkan.insertAdjacentHTML("forened", ono);
-            tampilkan.innerHTML = ono;
+            tampilkan.innerHTML = onol;
         }
     }
 </script>
+
+
+<!-- untuk mengatur ukuran  -->
+<script>
+    const tombolTampilkanInput = document.querySelector("form .ukuran .petunjuk");
+    const inputanLebar = document.querySelectorAll("form .ukuran input");
+
+    const garisanPetunjuk = document.querySelectorAll(".garisanPetunjuk");
+
+    let belum = true;
+    tombolTampilkanInput.addEventListener("click", function(){
+        if(belum){
+            document.querySelector("form .ukuran").style.height = "max-content";
+            belum = !belum;
+        } else {
+            document.querySelector("form .ukuran").style.height = "1rem";
+            belum = !belum;
+        }
+    })
+
+    inputanLebar.forEach((ini, i) => {
+        ini.addEventListener("input", function(){
+            gantiUkuranSvg(ini.value, i)
+        })
+    });
+    function gantiUkuranSvg(angka, ke){
+        const bulatan = Math.round(angka/32 * 2 - 6);
+        console.log("dan ini bulatannya = ", bulatan);
+
+        if(ke == 0){
+            garisanPetunjuk[ke].style.transform = `translateX(calc(-50% + 3/2 * ${bulatan}rem))`
+        } else {
+            garisanPetunjuk[ke].style.transform = `translateY(calc(-50% + 3/2 * ${bulatan}rem))`
+        }
+    }
+
+
+</script>
+
+<!-- melakukan submit/post data -->
 <script>
 
     const myForm = document.querySelector('form');
     const submitBtn = document.querySelector('#submit');
     
+    const catatan = document.querySelector("form #catatan");
+    
     async function handleFormSubmit (event) {
+        const valueLebar = [inputanLebar[0].value, inputanLebar[1].value];
+
         event.preventDefault();
         const jsonIni = {
+            ukuran: valueLebar,
+            catatan:catatan.value,
             path: inputan.value
         }
         console.log(JSON.stringify(jsonIni))
@@ -407,6 +659,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
     submitBtn.addEventListener("click", handleFormSubmit);
 </script>
+
 
 <!-- untuk menampilkan image ke layer belakang -->
  <script>
@@ -575,23 +828,34 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
  </script>
 
+<!-- mengambil data dari svg yang ditampilkan -->
 <script>
     tampilkan.addEventListener("click", event => {
         if(event.target.matches('div.copyy')){
-            console.log("pencetlah")
+            console.log("pencetlah");
             
             const inian = event.target.parentElement.querySelector("svg");
             const path = inian.querySelector("path").getAttribute("d");
+            const ukuran = inian.querySelector("path").getAttribute("ukuran").split(",");
+            
+            console.log(ukuran);
+            ukuran.forEach((ini, i) => {
+                gantiUkuranSvg(ini, i);
+                inputanLebar[i].value = ukuran[i];
+            })
+
 
             inputan.value = path;
             const paths = dariMana.querySelector('path');
-            paths.setAttribute("d", path)
+            paths.setAttribute("d", path);
         }
     })
 </script>
+
+<!-- mencegah pengguna kehilangan data yang belum di simpan -->
 <script>
-        let adaPerubahanBelumDisimpan = false;
-        window.addEventListener('beforeunload', (event) => {
+    let adaPerubahanBelumDisimpan = false;
+    window.addEventListener('beforeunload', (event) => {
         // Hanya tampilkan prompt jika flag 'adaPerubahanBelumDisimpan' bernilai true
         if (adaPerubahanBelumDisimpan) {
             // Baris-baris ini diperlukan untuk memicu dialog konfirmasi dari browser
