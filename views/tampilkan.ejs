@@ -524,13 +524,13 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         paths.setAttribute("d", this.value)
     })
 
-    const namaFont = window.location.href.split("/").pop();
-    tampilkanFont(namaFont);
+    const idPath = window.location.href.split("/").pop();
+    tampilkanFont(idPath);
     
-    async function tampilkanFont(namaFont) {
+    async function tampilkanFont(idPath) {
         let paths = []
         try {
-            const response = await fetch(`/api/dari/${namaFont}`);
+            const response = await fetch(`/api/ambil-dengan/${idPath}`);
             if(!response.ok){
                 throw new Error("not ok");
             }
@@ -540,7 +540,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         } catch(err){
             console.log(err);
         } finally {
-            const onol = paths.map(ono => {
+            const onol = paths.kumpulan.map(ono => {
                 let lebar = 192
                 let tinggi = 192
                 if(ono.ukuran){
@@ -636,7 +636,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         }
         console.log(JSON.stringify(jsonIni))
         try {
-            const response = await fetch('/api/dari/'+namaFont, {
+            const response = await fetch('/api/tambahkan-path/'+ idPath, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -653,7 +653,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         } catch(err) {
             console.log(err);
         } finally {
-            tampilkanFont(namaFont);
+            tampilkanFont(idPath);
         }
     }
 

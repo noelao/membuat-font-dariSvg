@@ -11,13 +11,13 @@ if (!supabaseUrl || !supabaseKey) {
 const supabase = createClient(supabaseUrl, supabaseKey);
 // Konfigurasi Supabase
 
-async function ambilCatatanBerapa(batas) {
-    let berapa = batas == null ? 10 : batas;
+async function ambilPathBerapa(batas) {
+    let berapa = batas == null ? 30 : batas;
     
     const { data, error } = await supabase
     .schema('svg')
-    .from('tulisan')
-    .select('*')
+    .from('path')
+    .select('id, judul')
     .limit(berapa);
 
     if(error){
@@ -27,7 +27,7 @@ async function ambilCatatanBerapa(batas) {
     return data;
 }
 
-async function ambilCatatanId(idToFind) {
+async function ambilJudulId(idToFind) {
   if (!idToFind) {
     console.error('Id article yang dicari tidak boleh kosong.');
     return null;
@@ -36,7 +36,7 @@ async function ambilCatatanId(idToFind) {
   try {
     const { data, error } = await supabase
         .schema('svg')    
-        .from('tulisan')
+        .from('path')
         .select('*')
         .eq('id', idToFind);
     if (error) {
@@ -56,18 +56,44 @@ async function ambilCatatanId(idToFind) {
   }
 }
 
+async function updateKumpulanPath(dataFull, id) {
+  try {
+    const { data, error } = await supabase
+      .schema('svg')
+      .from('path')
+      .update({
+        kumpulan: dataFull
+      })
+      .eq('id', id)
+      .select();
 
-async function buatTulisanBaru(dataIni) {
+    if (error) {
+      throw error;
+    }
+
+    if (data.length === 0) {
+    console.error('data tidak ditemukan ::', err);
+    return null;
+    }
+
+    return data[0];
+
+  } catch (err) {
+    console.error('Kesalahan tak terduga saat mengambil article id ::', err);
+    return null;
+  }
+}
+
+
+async function buatCollomPathBaru(dataIni) {
     try{
-        const { judul, svg, empu } = dataIni;
+        const { kumpulan } = dataIni;
 
         const { data, error } = await supabase
           .schema('svg')
-          .from('tulisan')
+          .from('path')
           .insert({ 
-            judul,
-            svg,
-            empu
+            kumpulan
           })
           .select()
           .single();
@@ -83,7 +109,8 @@ async function buatTulisanBaru(dataIni) {
 
 
 module.exports = {
-    ambilCatatanId,
-    ambilCatatanBerapa,
-    buatTulisanBaru
+  ambilJudulId,
+  ambilPathBerapa,
+  buatCollomPathBaru,
+  updateKumpulanPath
 }

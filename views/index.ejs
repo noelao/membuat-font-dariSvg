@@ -17,7 +17,7 @@
     tampilkanNama();
     async function tampilkanNama() {
         try {
-            const response = await fetch("/api/fonts");
+            const response = await fetch("/api/judul-table");
             if(!response.ok){
                 throw new Error("not ok");
             }
@@ -30,9 +30,9 @@
         } finally {
             const sup = font.map(ini => {
                 return `
-                <a href="/font/dari/${ini.replace(".le", "")}">
-                <h1>${ini.replace(".le", "")}
-                </h1>
+                <a href="/font/dari/${ini.id}">
+                    <h1>${ini.judul}
+                    </h1>
                 </a>
                 `
             }).join(" ");

@@ -7,7 +7,12 @@ const {
     bacaFolder,
     loadIni,
     tambahData
-} = require("../penulisData/saya")
+} = require("../penulisData/saya");
+const {
+    ambilPathBerapa,
+    ambilJudulId,
+    updateKumpulanPath
+} = require("../utils/tulis");
 // import utils
 
 
@@ -42,6 +47,33 @@ api.post("/dari/:nama", async (req, res) => {
     tambahData(dataPath, nama);
 
     res.json({success:true});
+})
+
+
+api.get("/judul-table", async (req, res) => {
+    const data = await ambilPathBerapa();
+    res.json(data);
+})
+api.get("/ambil-dengan/:id", async (req, res) => {
+    const id = req.params.id;
+
+    const data = await ambilJudulId(id);
+    res.json(data);
+})
+
+api.post("/tambahkan-path/:id", async (req, res) => {
+    const id = req.params.id;
+    const calonData = req.body;
+
+    const data = await ambilJudulId(id);
+    calonData.id = data.kumpulan[data.kumpulan.length-1].id + 1;
+
+    data.kumpulan.push(calonData);
+    const gabunganData = data.kumpulan;
+
+    const dataBaru = updateKumpulanPath(gabunganData, id);
+
+    res.json({success:true, json: dataBaru});
 })
 
 
