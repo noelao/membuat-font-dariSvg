@@ -6,15 +6,18 @@ const {
     tulis,
     bacaFolder,
     loadIni
-} = require("../penulisData/saya")
+} = require("../penulisData/saya");
+const {
+    authSession
+} = require("../utils/auth");
 // import utils
 
 
-fnt.get("/", (req, res) => {
+fnt.get("/", authSession, (req, res) => {
     bacaFolder();
     res.render("buat")
 })
-fnt.get("/buat", (req, res) => {
+fnt.get("/buat", authSession, (req, res) => {
     bacaFolder();
     res.render("buat")
 })

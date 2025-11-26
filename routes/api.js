@@ -13,6 +13,9 @@ const {
     ambilJudulId,
     updateKumpulanPath
 } = require("../utils/tulis");
+const {
+    authSession
+} = require("../utils/auth");
 // import utils
 
 
@@ -50,18 +53,18 @@ api.post("/dari/:nama", async (req, res) => {
 })
 
 
-api.get("/judul-table", async (req, res) => {
+api.get("/judul-table", authSession, async (req, res) => {
     const data = await ambilPathBerapa();
     res.json(data);
 })
-api.get("/ambil-dengan/:id", async (req, res) => {
+api.get("/ambil-dengan/:id", authSession, async (req, res) => {
     const id = req.params.id;
 
     const data = await ambilJudulId(id);
     res.json(data);
 })
 
-api.post("/tambahkan-path/:id", async (req, res) => {
+api.post("/tambahkan-path/:id", authSession, async (req, res) => {
     const id = req.params.id;
     const calonData = req.body;
 

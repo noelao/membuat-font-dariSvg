@@ -27,8 +27,26 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cookieParser());
 
 
+// utils
+const { authSession } = require("./utils/auth");
+app.use(authSession, (req, res, next) => {
+  console.log("ini dieksekusi ...")
+  try {
+    if(req.user){
+      res.locals.currentUser = req.user;
+      console.log("ada session")
+    } else {
+      res.locals.currentUser = null;
+    }
+  } catch (err){
+    console.log(err)
+    res.locals.currentUser = null;
+  }
+  next();
+});
 
-app.get('/', async (req, res) => {
+
+app.get('/', authSession, async (req, res) => {
     res.render('index');
 });
 
@@ -37,12 +55,10 @@ const { bacaFolder } = require('./penulisData/saya');
 const fontRoute = require('./routes/font');
 const apiRoute = require('./routes/api');
 const loginRoute = require('./routes/auth');
-const empuRoute = require('./routes/empu');
 
 app.use('/font', fontRoute);
 app.use('/api', apiRoute);
 app.use('/auth', loginRoute);
-app.use('/empu', empuRoute);
 
 
 

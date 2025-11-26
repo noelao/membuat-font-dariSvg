@@ -48,7 +48,7 @@ authIni.post('/login', async (req, res) => {
         maxAge: 3600000 
       });
       console.log('Token disematkan di cookie, redirecting ke /admin');
-      return res.redirect('/empu');
+      return res.redirect('/');
     } else {
       console.log('Login gagal:', loginResult.message);
       return res.redirect('/auth/login?error=authfailed');
@@ -93,7 +93,7 @@ authIni.post('/lahirkan', async (req, res) => {
           maxAge: 3600000
         });
         console.log('Token disematkan di cookie, redirecting ke /admin');
-        return res.redirect('/empu');
+        return res.redirect('/');
       } else {
         console.log('Login gagal:', loginResult.message);
         return res.redirect('/auth/login?error=authfailed');
