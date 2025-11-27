@@ -11,7 +11,8 @@ const {
 const {
     ambilPathBerapa,
     ambilJudulId,
-    updateKumpulanPath
+    updateKumpulanPath,
+    buatRepoBaru
 } = require("../utils/tulis");
 const {
     authSession
@@ -68,16 +69,34 @@ api.post("/tambahkan-path/:id", authSession, async (req, res) => {
     const id = req.params.id;
     const calonData = req.body;
 
-    const data = await ambilJudulId(id);
-    calonData.id = data.kumpulan[data.kumpulan.length-1].id + 1;
-
-    data.kumpulan.push(calonData);
-    const gabunganData = data.kumpulan;
-
-    const dataBaru = updateKumpulanPath(gabunganData, id);
-
-    res.json({success:true, json: dataBaru});
+    try {
+        const data = await ambilJudulId(id);
+        calonData.id = data.kumpulan[data.kumpulan.length-1].id + 1;
+    
+        data.kumpulan.push(calonData);
+        const gabunganData = data.kumpulan;
+    
+        const dataBaru = updateKumpulanPath(gabunganData, id);
+    
+        res.json({success:true, json: dataBaru});
+    } catch(err){
+        calonData.id = 1;
+        dataIni = []
+        dataIni.push(calonData);
+        const dataBaru = updateKumpulanPath(dataIni, id);
+        res.json({success:true, json: dataBaru});
+    }
 })
 
+// tambahkan repo baru
+api.post("/repo-baru", authSession, async (req, res) => {
+    const apa = req.body;
+    console.log(apa);
+    apa.kumpulan = [];
+
+    const data = await buatRepoBaru(apa);
+
+    res.json({success:true, json: data});
+})
 
 module.exports = api;

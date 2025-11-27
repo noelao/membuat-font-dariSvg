@@ -83,8 +83,6 @@ async function updateKumpulanPath(dataFull, id) {
     return null;
   }
 }
-
-
 async function buatCollomPathBaru(dataIni) {
     try{
         const { kumpulan } = dataIni;
@@ -106,11 +104,31 @@ async function buatCollomPathBaru(dataIni) {
         return(err.message)
     }
 }
+async function buatRepoBaru(dataIni) {
+    try{
+
+        const { data, error } = await supabase
+          .schema('svg')
+          .from('path')
+          .insert(dataIni)
+          .select()
+          .single();
+        
+        if(error){
+          return(error)
+        }
+        return(data)
+    } catch(err){
+        return(err.message)
+    }
+}
+
 
 
 module.exports = {
   ambilJudulId,
   ambilPathBerapa,
   buatCollomPathBaru,
-  updateKumpulanPath
+  updateKumpulanPath,
+  buatRepoBaru
 }

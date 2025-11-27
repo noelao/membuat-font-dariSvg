@@ -4,6 +4,7 @@
         padding: 12px;
         flex-wrap: wrap;
         .ini {
+            width: 8rem;
             cursor: var(--cur-pointer);
             height: max-content;
             position: relative;
@@ -12,10 +13,12 @@
             flex-direction: column;
             
             .copyy {
+                width: 8rem;
                 height: 100%;
                 position: absolute;
             }
             svg {
+                height: 8rem;
                 z-index: -10;
             }
         }
@@ -275,6 +278,21 @@
             }
             .tombol:hover {
                 background-color: #eeeeee;
+            }
+        }
+    }
+</style>
+<style>
+    @media screen and (max-width: 768px) {
+        .hurufan {
+            .ini {
+                width: 4rem;
+                .copyy {
+                    width: 4rem;
+                }
+                svg {
+                    height: 4rem;
+                }
             }
         }
     }
@@ -540,41 +558,43 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         } catch(err){
             console.log(err);
         } finally {
-            const onol = paths.kumpulan.map(ono => {
-                let lebar = 192
-                let tinggi = 192
-                if(ono.ukuran){
-                    tinggi = parseInt(ono.ukuran[0]);
-                    lebar = parseInt(ono.ukuran[1]);
-                }
-                const lebar2 = 8 * lebar/192;
-
-                let catatan = "..."
-                if(ono.catatan){
-                    catatan = ono.catatan == null ? "..." : ono.catatan;
-                } 
-
-                return `
-                <div class="ini" style="width: ${8}rem;">
-                    <div class="copyy" style="width: ${8}rem;">
+            if(paths.kumpulan != null){
+                const onol = paths.kumpulan.map(ono => {
+                    let lebar = 192
+                    let tinggi = 192
+                    if(ono.ukuran){
+                        tinggi = parseInt(ono.ukuran[0]);
+                        lebar = parseInt(ono.ukuran[1]);
+                    }
+                    const lebar2 = 8 * lebar/192;
+    
+                    let catatan = "..."
+                    if(ono.catatan){
+                        catatan = ono.catatan == null ? "..." : ono.catatan;
+                    } 
+    
+                    return `
+                    <div class="ini">
+                        <div class="copyy">
+                        </div>
+                        <svg id="${ono.id}" viewBox="0 0 ${lebar} ${tinggi}" xmlns="http://www.w3.org/2000/svg">
+                            
+                            <path d="${ono.path}"
+                            ukuran="${tinggi+","+lebar}"
+                            fill="black" />
+                            
+                        </svg>
+                        <div class="nama">
+                            <small>
+                                ${catatan}
+                            </small>
+                        </div>
                     </div>
-                    <svg width="${8}rem" height="${8}rem" id="${ono.id}" viewBox="0 0 ${lebar} ${tinggi}" xmlns="http://www.w3.org/2000/svg">
-                        
-                        <path d="${ono.path}"
-                        ukuran="${tinggi+","+lebar}"
-                        fill="black" />
-                        
-                    </svg>
-                    <div class="nama">
-                        <small>
-                            ${catatan}
-                        </small>
-                    </div>
-                </div>
-                `
-            }).join("");
-            // tampilkan.insertAdjacentHTML("forened", ono);
-            tampilkan.innerHTML = onol;
+                    `
+                }).join("");
+                // tampilkan.insertAdjacentHTML("forened", ono);
+                tampilkan.innerHTML = onol;
+            }
         }
     }
 </script>

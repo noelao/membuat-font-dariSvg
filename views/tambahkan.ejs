@@ -1,0 +1,63 @@
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 3rem;
+        width: 100%;
+        input {
+            width: 9rem;
+        }
+        input[type="text"]{
+            cursor: var(--cur-teks);
+        }
+        input[type="submit"]{
+            cursor: var(--cur-pointer);
+        }
+    }
+</style>
+
+<form id="formPosting">
+    <input type="text" placeholder="nama repo ..." name="judul" id="judul" equired>
+    <input type="submit" value="post">
+</form>
+
+<script>
+const form = document.getElementById('formPosting');
+
+form.addEventListener('submit', async (event) => {
+    
+    event.preventDefault(); 
+
+    const formData = new FormData(form);
+    const dataPayload = Object.fromEntries(formData); 
+    console.log(dataPayload);
+
+    try {
+        const response = await fetch('http://localhost:3000/api/repo-baru', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataPayload)
+        });
+
+        const hasil = await response.json();
+
+        if (response.ok) {
+            console.log("Sukses! Data terkirim.");
+            window.location.href = '/';
+        } else {
+            console.log("Gagal: " + hasil.message);
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+        console.log("Error koneksi server");
+    }
+});
+
+
+
+</script>

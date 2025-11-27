@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const helmet = require('helmet');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 
@@ -11,9 +12,27 @@ const port = process.env.PORT || 3000;
 const expressLayouts = require('express-ejs-layouts');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.set('layout', 'layouts/main')
+app.set('layout', 'layouts/main');
 app.use(expressLayouts);
-app.set('layout', 'layouts/main')
+app.set('layout', 'layouts/main');
+
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        // Izinkan koneksi ke Supabase & Vercel
+        connectSrc: ["'self'", "https://*.supabase.co", "https://vitals.vercel-insights.com"], 
+        // Izinkan script dari Vercel
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://vercel.live", "https://*.supabase.co"],
+        // Izinkan gambar (Vercel kadang pakai SVG untuk icon)
+        imgSrc: ["'self'", "data:", "https://*.supabase.co", "https://vercel.com"],
+        // Izinkan frame (jika pakai Vercel Preview Toolbar)
+        frameSrc: ["'self'", "https://vercel.live"],
+      },
+    },
+  })
+);
 
 
 
@@ -48,6 +67,9 @@ app.use(authSession, (req, res, next) => {
 
 app.get('/', authSession, async (req, res) => {
     res.render('index');
+});
+app.get('/tambah', authSession, async (req, res) => {
+    res.render('tambahkan');
 });
 
 
