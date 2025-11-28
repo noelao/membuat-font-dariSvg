@@ -16,6 +16,22 @@
                 width: 8rem;
                 height: 100%;
                 position: absolute;
+
+                display: flex;
+                align-items:end;
+                justify-content: end;
+                padding-bottom: 2rem;
+                svg {
+                    background-color: #fff;
+                    opacity: 0;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                }
+            }
+            .copyy:hover {
+                svg {
+                    opacity: 1;
+                }
             }
             svg {
                 height: 8rem;
@@ -235,6 +251,7 @@
 <style>
     .mode {
         display: flex;
+        width: 100%;
         .terpilih {
             padding: 8px 12px;
             background-color: #82f166;
@@ -280,6 +297,36 @@
                 background-color: #eeeeee;
             }
         }
+        .konfirmasi {
+            display: none;
+
+            flex: 1;
+            /* display: flex; */
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: max-content;
+
+            gap: 12px;
+            div {
+                padding: 0 12px;
+                color: #fff;
+            }
+            .iya {
+                cursor: var(--cur-pointer);
+                background-color: red;
+                small {
+                    cursor: var(--cur-pointer);
+                }
+            }
+            .tidak {
+                cursor: var(--cur-pointer);
+                background-color: green;
+                small {
+                    cursor: var(--cur-pointer);
+                }
+            }
+        }
     }
 </style>
 <style>
@@ -314,7 +361,12 @@
         </div>
         <p class="pilihan tambah">tambah</p>
         <p class="pilihan hapus">hapus</p>
-        <p class="pilihan update">update</p>
+        <p class="pilihan edit">edit</p>
+    </div>
+    <div class="konfirmasi">
+        <small>hapus svg : </small>
+        <div class="iya"><small>yoi</small></div>
+        <div class="tidak"><small>nope</small></div>
     </div>
 </div>
 
@@ -413,6 +465,7 @@ A 32 32 0 0 1 48 96 H 0"
     <div class="garisHorizontal garisanPetunjuk"></div>
 </div>
 <div class="tulisHuruf">
+    
     <form>
         <input type="text" placeholder="name" id="catatan" name="catatan">
         <div class="ukuran">
@@ -479,14 +532,18 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
             <input type="file" name="foto" id="foto" class="foto">
         </div>
         <div class="lihat">
-
+            
         </div>
+
     </div>
 </div>
 
 
 <!-- ganti mode pada -->
 <script>
+    let modeIni = "tambah";
+
+
     const tombolMode = document.querySelector(".mode .pilih .tombol");
     const tombolModePilihan = document.querySelectorAll(".mode .pilih .pilihan");
     const displayModeName = document.querySelector(".mode .terpilih");
@@ -512,14 +569,20 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
             }
             if(i == "0"){
                 displayModeName.textContent = "tambah data";
+                modeIni = "tambah";
+                tampilkanFont(idPath, modeIni);
                 displayModeName.style.backgroundColor = "#82f166";
                 displayModeName.style.color = "black"
             } else if(i == "1"){
-                displayModeName.style.backgroundColor = "red";
                 displayModeName.textContent = "hapus data";
+                modeIni = "hapus";
+                tampilkanFont(idPath, modeIni);
+                displayModeName.style.backgroundColor = "red";
                 displayModeName.style.color = "white"
             } else {
-                displayModeName.textContent = "update data";
+                displayModeName.textContent = "edit data";
+                modeIni = "edit";
+                tampilkanFont(idPath, modeIni);
                 displayModeName.style.backgroundColor = "blue";
                 displayModeName.style.color = "white"
             }
@@ -543,9 +606,11 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
     })
 
     const idPath = window.location.href.split("/").pop();
-    tampilkanFont(idPath);
+    tampilkanFont(idPath, modeIni);
     
-    async function tampilkanFont(idPath) {
+    async function tampilkanFont(idPath, modeIni = "tambah") {
+        console.log(modeIni);
+
         let paths = []
         try {
             const response = await fetch(`/api/ambil-dengan/${idPath}`);
@@ -553,7 +618,6 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
                 throw new Error("not ok");
             }
             
-
             paths = await response.json();
         } catch(err){
             console.log(err);
@@ -576,11 +640,18 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
                     return `
                     <div class="ini">
                         <div class="copyy">
+                            <svg id="petunjuk" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+                                
+                                <path d="M 0 96 H 32 V 0 H 64 V 64 H 112 L 176 160 V 192 H 0"
+                                fill="black" />
+                                
+                            </svg>
                         </div>
-                        <svg id="${ono.id}" viewBox="0 0 ${lebar} ${tinggi}" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="sesuatuIni" id="${ono.id}" viewBox="0 0 ${lebar} ${tinggi}" xmlns="http://www.w3.org/2000/svg">
                             
                             <path d="${ono.path}"
                             ukuran="${tinggi+","+lebar}"
+                            namanya="${ono.catatan}"
                             fill="black" />
                             
                         </svg>
@@ -625,7 +696,6 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
     });
     function gantiUkuranSvg(angka, ke){
         const bulatan = Math.round(angka/32 * 2 - 6);
-        console.log("dan ini bulatannya = ", bulatan);
 
         if(ke == 0){
             garisanPetunjuk[ke].style.transform = `translateX(calc(-50% + 3/2 * ${bulatan}rem))`
@@ -656,24 +726,42 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
         }
         console.log(JSON.stringify(jsonIni))
         try {
-            const response = await fetch('/api/tambahkan-path/'+ idPath, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonIni) 
-            });
-            if(!response.ok){
-                throw new Error("no okk");
+            if(modeIni == "edit" && idSvgTerpilihUntukDiEdit){
+                // set id yang akan di edit
+                jsonIni.id = idSvgTerpilihUntukDiEdit;
+
+                const response = await fetch(`/api/edit-path/${idPath}/${idSvgTerpilihUntukDiEdit}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonIni) 
+                });
+                if(!response.ok){
+                    throw new Error("no okk");
+                }
+    
+                const feedBack = await response.json();
+                console.log(feedBack);
+            } else {
+                const response = await fetch('/api/tambahkan-path/'+ idPath, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonIni) 
+                });
+                if(!response.ok){
+                    throw new Error("no okk");
+                }
+    
+                const feedBack = await response.json();
+                console.log(feedBack);
             }
-
-            const feedBack = await response.json();
-            console.log(feedBack);
-
         } catch(err) {
             console.log(err);
         } finally {
-            tampilkanFont(idPath);
+            tampilkanFont(idPath, modeIni);
         }
     }
 
@@ -687,8 +775,6 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
     const tampilkanGambar = document.getElementById("previewGambar");
     const parentHilang = tampilkanGambar.parentElement;
     const tombolTampilkan = document.querySelector(".tombolanFoto .lihat");
-
-    console.log(parentHilang)
 
     inputFile.addEventListener('change', function() {
             
@@ -850,24 +936,35 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
 <!-- mengambil data dari svg yang ditampilkan -->
 <script>
+    let idSvgTerpilihUntukDiEdit
+    let svgTerpilih
+
     tampilkan.addEventListener("click", event => {
         if(event.target.matches('div.copyy')){
-            console.log("pencetlah");
-            
-            const inian = event.target.parentElement.querySelector("svg");
+            const inian = event.target.parentElement.querySelector("svg.sesuatuIni");
+            idSvgTerpilihUntukDiEdit = inian.id;
+            console.log("id seiap di edeit svg dari id : ", idSvgTerpilihUntukDiEdit);
+
             const path = inian.querySelector("path").getAttribute("d");
             const ukuran = inian.querySelector("path").getAttribute("ukuran").split(",");
+            const namanya = inian.querySelector("path").getAttribute("namanya");
             
-            console.log(ukuran);
             ukuran.forEach((ini, i) => {
                 gantiUkuranSvg(ini, i);
                 inputanLebar[i].value = ukuran[i];
             })
 
-
             inputan.value = path;
+            catatan.value = namanya;
             const paths = dariMana.querySelector('path');
             paths.setAttribute("d", path);
+
+            if(modeIni == "hapus"){
+                document.querySelector(".konfirmasi").style.display = "flex";
+                svgTerpilih = event.target.parentElement;
+                console.log(svgTerpilih);
+                svgTerpilih.style.backgroundColor = "#00000022"
+            }
         }
     })
 </script>

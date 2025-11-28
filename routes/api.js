@@ -75,7 +75,9 @@ api.post("/tambahkan-path/:id", authSession, async (req, res) => {
     
         data.kumpulan.push(calonData);
         const gabunganData = data.kumpulan;
-    
+
+
+        // kirim pure kumpulan
         const dataBaru = updateKumpulanPath(gabunganData, id);
     
         res.json({success:true, json: dataBaru});
@@ -85,6 +87,30 @@ api.post("/tambahkan-path/:id", authSession, async (req, res) => {
         dataIni.push(calonData);
         const dataBaru = updateKumpulanPath(dataIni, id);
         res.json({success:true, json: dataBaru});
+    }
+})
+
+api.post("/edit-path/:id/:idSvg", authSession, async (req, res) => {
+    const id = req.params.id;
+    const idSvg = req.params.idSvg;
+
+    const calonData = req.body;
+
+    try {
+        const data = await ambilJudulId(id);
+        calonData.id = data.kumpulan[data.kumpulan.length-1].id + 1;
+    
+        const indexKumpulan = data.kumpulan.findIndex(item => item.id == idSvg);
+
+        data.kumpulan[indexKumpulan] = calonData;
+        const gabunganData = data.kumpulan;
+    
+        // kirim pure kumpulan;
+        const dataBaru = updateKumpulanPath(gabunganData, id);
+    
+        res.json({success:true, json: dataBaru});
+    } catch(err){
+        res.json({success:false, json:{ke:"error mok"}});
     }
 })
 
