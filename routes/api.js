@@ -65,6 +65,7 @@ api.get("/ambil-dengan/:id", authSession, async (req, res) => {
     res.json(data);
 })
 
+
 api.post("/tambahkan-path/:id", authSession, async (req, res) => {
     const id = req.params.id;
     const calonData = req.body;
@@ -98,7 +99,6 @@ api.post("/edit-path/:id/:idSvg", authSession, async (req, res) => {
 
     try {
         const data = await ambilJudulId(id);
-        calonData.id = data.kumpulan[data.kumpulan.length-1].id + 1;
     
         const indexKumpulan = data.kumpulan.findIndex(item => item.id == idSvg);
 
@@ -109,6 +109,27 @@ api.post("/edit-path/:id/:idSvg", authSession, async (req, res) => {
         const dataBaru = updateKumpulanPath(gabunganData, id);
     
         res.json({success:true, json: dataBaru});
+    } catch(err){
+        res.json({success:false, json:{ke:"error mok"}});
+    }
+})
+
+// hapus path
+api.post("/hapus-path/:id/:idSvg", authSession, async (req, res) => {
+    const id = req.params.id;
+    const idSvg = req.params.idSvg;
+
+    try {
+        const data = await ambilJudulId(id);
+        const indexKumpulan = data.kumpulan.findIndex(item => item.id == idSvg);
+
+        data.kumpulan.splice(indexKumpulan, 1);
+        const gabunganData = data.kumpulan;
+
+        // kirim pure kumpulan;
+        const dataBaru = updateKumpulanPath(gabunganData, id);
+    
+        res.json({success:true, json:{data:dataBaru}});
     } catch(err){
         res.json({success:false, json:{ke:"error mok"}});
     }

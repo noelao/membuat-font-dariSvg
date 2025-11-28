@@ -21,6 +21,7 @@
                 align-items:end;
                 justify-content: end;
                 padding-bottom: 2rem;
+                padding-right: 1rem;
                 svg {
                     background-color: #fff;
                     opacity: 0;
@@ -71,7 +72,7 @@
             transform: translateX(-2rem) translateY(1rem);
 
             span {
-            flex: 1;
+                flex: 1;
             }
         }
         .angkaBantu2{
@@ -86,7 +87,7 @@
             transform: translateX(1rem) translateY(-1.5rem);
 
             span {
-            flex: 1;
+                flex: 1;
             }
         }
     }
@@ -365,8 +366,8 @@
     </div>
     <div class="konfirmasi">
         <small>hapus svg : </small>
-        <div class="iya"><small>yoi</small></div>
-        <div class="tidak"><small>nope</small></div>
+        <div class="pilihan iya"><small>yoi</small></div>
+        <div class="pilihan tidak"><small>nope</small></div>
     </div>
 </div>
 
@@ -670,7 +671,6 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
     }
 </script>
 
-
 <!-- untuk mengatur ukuran  -->
 <script>
     const tombolTampilkanInput = document.querySelector("form .ukuran .petunjuk");
@@ -767,7 +767,6 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
     submitBtn.addEventListener("click", handleFormSubmit);
 </script>
-
 
 <!-- untuk menampilkan image ke layer belakang -->
  <script>
@@ -934,6 +933,45 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
  </script>
 
+<!-- atur popup -->
+<script>
+const konfirmasiIni = document.querySelector(".konfirmasi");
+const pilihanKonfirmasi = konfirmasiIni.querySelectorAll(".pilihan");
+
+async function munculkanPopUpKonfirmasi(pesan){
+    konfirmasiIni.style.display = "flex";
+}
+
+pilihanKonfirmasi.forEach((ini, i ) => {
+    ini.addEventListener("click", async function(){
+        if(i == 1){
+            konfirmasiIni.style.display = "none";
+        } else {
+            konfirmasiIni.style.display = "none";
+            try {
+                jsonIni = {kamu:"dimana"}
+                const response = await fetch(`/api/hapus-path/${idPath}/${idSvgTerpilihUntukDiEdit}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonIni) 
+                });
+                if(!response.ok){
+                    throw new Error("no okk");
+                }
+                alert("berhasil hapus");
+            } catch(err){
+                console.log(err);
+            } finally {
+                tampilkanFont(idPath, modeIni);
+            }
+        }
+    })
+});
+
+</script>
+
 <!-- mengambil data dari svg yang ditampilkan -->
 <script>
     let idSvgTerpilihUntukDiEdit
@@ -941,6 +979,16 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
 
     tampilkan.addEventListener("click", event => {
         if(event.target.matches('div.copyy')){
+            // hilangkan background karena ini sudah tidak lagi terpilih
+            if(svgTerpilih){
+                svgTerpilih.style.backgroundColor = "transparent";
+            }
+            
+            svgTerpilih = event.target.parentElement;
+            console.log(svgTerpilih);
+            svgTerpilih.style.backgroundColor = "#00000022"
+
+
             const inian = event.target.parentElement.querySelector("svg.sesuatuIni");
             idSvgTerpilihUntukDiEdit = inian.id;
             console.log("id seiap di edeit svg dari id : ", idSvgTerpilihUntukDiEdit);
@@ -960,10 +1008,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
             paths.setAttribute("d", path);
 
             if(modeIni == "hapus"){
-                document.querySelector(".konfirmasi").style.display = "flex";
-                svgTerpilih = event.target.parentElement;
-                console.log(svgTerpilih);
-                svgTerpilih.style.backgroundColor = "#00000022"
+                munculkanPopUpKonfirmasi("hapus svg ini ? ");
             }
         }
     })
