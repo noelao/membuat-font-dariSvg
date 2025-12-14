@@ -528,6 +528,20 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
                 </svg>
             </div>
         </div>
+        <div class="flip">
+            <div class="tombol bawah">
+                <svg viewBox="0 0 112 112" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 48 0 V 112 H 0 Z M 64 0 V 112 H 112
+                    " fill="black"></path>
+                </svg>
+            </div>
+            <div class="tombol atas">
+                <svg viewBox="0 0 112 112" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 0 48 H 112 V 0 Z M 0 64 H 112 V 112
+                    " fill="black"></path>
+                </svg>
+            </div>
+        </div>
     </div>
     <div class="tombolanFoto">
         <div class="image">
@@ -812,6 +826,7 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
  <script>
     const tombolHori = document.querySelectorAll(".hori .tombol");
     const tombolVerti = document.querySelectorAll(".verti .tombol");
+    const tombolFlip = document.querySelectorAll(".flip .tombol");
 
     // geser ke kanan dan kiri
     tombolHori.forEach((tomble, i) => {
@@ -830,6 +845,15 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
                 geserVerti(16);
             } else {
                 geserVerti(-16);
+            }
+        })
+    });
+    tombolFlip.forEach((tomble, i) => {
+        tomble.addEventListener("click", function(){
+            if(i == 0){
+                flipVerti()
+            } else {
+                flipHori()
             }
         })
     });
@@ -915,6 +939,126 @@ M 0 32 H 48 A 32 32 0 0 1 80 64 A 32 32 0 0 1 48 96 H 0</textarea>
                             } else {
                                 return angka;
                             }
+                        }
+                    }
+                } else {
+                    indexNotNan = i;
+                    return ini;
+                }
+            } catch(err){
+                console.log(err);
+            }
+        }).join(" ");
+
+        inputan.value = hasilan;
+        const paths = dariMana.querySelector('path');
+        
+        paths.setAttribute("d", hasilan)
+    }
+
+    function flipHori(){
+        const reso = document.querySelectorAll(".ukuran .input input");
+
+        const sebelumDari = inputan.value.split(" ");
+        const dari = sebelumDari.map(ini => {
+            return ini.replace(",", "").replace("\n", "")
+        });
+        
+        let indexNotNan = null
+
+        const tinggi = parseInt(reso[1].value);
+        console.log(dari);
+        // balik vertical
+        const hasilan = dari.map((ini, i) => {
+            try {
+                const angka = parseInt(ini);
+
+                if(Number.isFinite(angka)){
+                    const titikTengah = tinggi/2;
+                    const rumus = titikTengah - (titikTengah - angka) * -1;
+                    console.log(rumus);
+                    if(dari[indexNotNan] == "A"){
+                        if(indexNotNan + 7 == i) {
+                            return rumus;
+                        } 
+                        else if(indexNotNan + 5 == i) {
+                            if(angka == 0){
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return angka;
+                        }
+                    } else if(dari[parseInt(i)-1] == "H"){
+                            return angka;
+                    } else {
+                        if(indexNotNan + 2 == i) {
+                            return rumus;
+                        } else if(indexNotNan + 1 == i) {
+                            if(dari[parseInt(i)-1] == "V"){
+                                return rumus;
+                            } else {
+                                return angka;
+                            }
+                        }
+                    }
+                } else {
+                    indexNotNan = i;
+                    return ini;
+                }
+            } catch(err){
+                console.log(err);
+            }
+        }).join(" ");
+
+        inputan.value = hasilan;
+        const paths = dariMana.querySelector('path');
+        
+        paths.setAttribute("d", hasilan)
+    }
+
+    function flipVerti(){
+        const reso = document.querySelectorAll(".ukuran .input input");
+
+        const sebelumDari = inputan.value.split(" ");
+        const dari = sebelumDari.map(ini => {
+            return ini.replace(",", "").replace("\n", "")
+        });
+        
+        let indexNotNan = null
+
+        const geser = 16;
+        
+        const lebar = parseInt(reso[1].value);
+        // balik vertical
+        const hasilan = dari.map((ini, i) => {
+            try {
+                const angka = parseInt(ini);
+
+                if(Number.isFinite(angka)){
+                    const titikTengah = lebar/2;
+                    const rumus = titikTengah - (titikTengah - angka) * -1;
+                    console.log(rumus);
+                    if(dari[indexNotNan] == "A"){
+                        if(indexNotNan + 6 == i) {
+                            return rumus;
+                        } else if(indexNotNan + 5 == i) {
+                            if(angka == 0){
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return angka;
+                        }
+                    } else if(dari[parseInt(i)-1] == "V"){
+                        return angka;
+                    } else {
+                        if(indexNotNan + 2 == i) {
+                            return angka;
+                        } else if(indexNotNan + 1 == i) {
+                            return rumus;
                         }
                     }
                 } else {

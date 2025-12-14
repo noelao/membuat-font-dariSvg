@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: sup;
+            src: url(supercell.ttf);
+        }
+        * {
+            font-family: sup;
+        }
+        small {
+            font-size: 3rem;
+        }
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+            color: #fff;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            small {
+                letter-spacing: 5px;
+                line-height: 1;
+                margin-top: -22px;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <small>anu</small>
+            <small>gor</small>
+            <small>eng</small>
+        </div>
+    </div>
+</body>
+</html>
