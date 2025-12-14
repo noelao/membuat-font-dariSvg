@@ -72,7 +72,11 @@ api.post("/tambahkan-path/:id", authSession, async (req, res) => {
 
     try {
         const data = await ambilJudulId(id);
-        calonData.id = parseInt(data.kumpulan[data.kumpulan.length-1].id) + 1;
+        const lastItem = data.kumpulan[data.kumpulan.length - 1];
+    
+        const lastId = parseInt(lastItem.id, 10) || 0;
+
+        calonData.id = lastId + 1;
     
         data.kumpulan.push(calonData);
         const gabunganData = data.kumpulan;
